@@ -1,6 +1,7 @@
 var LoginPage = require('./pages/login.page');
 var InputPage = require('./pages/input.page');
 var OverviewPage = require('./pages/overview.page');
+var LeftMenu = require('./pages/left.menu.page');
 var using = require('jasmine-data-provider');
 var testdata = require('./test_data/ch.overview.scores.testdata.js');
 var users_data = require('./test_data/users.testdata.js');
@@ -11,8 +12,9 @@ page.typePassword(users_data[0].Password);
 page.loginToDash();
 
 using(testdata, function (data) {
-    describe(data.Case + ' Scores for overview: ', function () {
-        it('user lands on Input page', function () {
+    describe(' Scores for overview: ', function () {
+        it(data.Case + ' user lands on Input page', function () {
+            allure.feature('Overview page');
             page = new InputPage(page);
 
             //Setting Up text fields
@@ -41,11 +43,41 @@ using(testdata, function (data) {
             page.setValueOfField(page.numberOfParkingSpots, number_of_parking_spots);
 
             //Setting up additional parameters (lift etc)
-            if (data.LIFT == 1) {
-                page.lift.click();
+            switch (data.LIFT) {
+                case ("1"):
+                    page.liftCheckbox.isSelected().then(function (selected) {
+                        if (selected == false) {
+                            page.lift.click();
+                        }
+                    });
+                    break;
+                case ("0"):
+                    page.liftCheckbox.isSelected().then(function (selected) {
+                        if (selected == true) {
+                            page.lift.click();
+                        }
+                    });
+                    break;
+                default:
+                    break;
             }
-            if (data.MINERGIE == 1) {
-                page.minenergy.click();
+            switch (data.MINERGIE) {
+                case ("1"):
+                    page.minergyCheckbox.isSelected().then(function (selected) {
+                        if (selected == false) {
+                            page.lift.click();
+                        }
+                    });
+                    break;
+                case ("0"):
+                    page.minergyCheckbox.isSelected().then(function (selected) {
+                        if (selected == true) {
+                            page.lift.click();
+                        }
+                    });
+                    break;
+                default:
+                    break;
             }
 
             //Scrolling down to Quality and Condition
@@ -173,6 +205,7 @@ using(testdata, function (data) {
                 //Verify Noise Value is valid
                 page.noiseScore.getText().then(function (text) {
                     noiseScoreNumber = Number(text);
+                    browser.waitForAngular();
                     if (1 < noiseScoreNumber && noiseScoreNumber <= 5) {
                         expect('Test is passed').toBe('Test is passed');
                     } else {
@@ -210,11 +243,15 @@ using(testdata, function (data) {
                     } else {
                         expect('Test is passed').toBe('Failed');
                     }
-                });                
+                }).then(function () {
+                    page = new LeftMenu(page);
+                });
             });
-            while (true){
-                    page.address.click();
-                }
+        }, 240000);
+
+        it('user is returned to Input page', function () {
+            allure.feature('Navigation with Left Menu');
+            page.menuItems.get(0).click();
         });
     });
 });
