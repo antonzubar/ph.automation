@@ -42,7 +42,7 @@ using(testdata, function (data) {
             page.setValueOfField(page.numberOfGarages, number_of_garages);
             page.setValueOfField(page.numberOfParkingSpots, number_of_parking_spots);
 
-            //Setting up additional parameters (lift etc)
+            //Setting up additional parameters (lift, minergie etc)
             switch (data.LIFT) {
                 case ("1"):
                     page.liftCheckbox.isSelected().then(function (selected) {
