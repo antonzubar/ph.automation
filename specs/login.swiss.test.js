@@ -7,9 +7,9 @@ var testdata = require('./test_data/users.testdata.js');
 
 
 using(testdata, function (data) {
-    describe(data.UserName + ' logins as ' + data.countryCode + ' user: ', function () {
+    describe(' Login page ' + data.countryCode + ' user: ', function () {
         var page = new LoginPage();
-        it('user lands on Login page', function () {
+        it(data.UserName + 'user lands on Login page', function () {
             allure.feature('Login/Logout feature');
             expect(browser.getTitle()).toEqual('Login | dash');
         });
