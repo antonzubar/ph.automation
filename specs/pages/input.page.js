@@ -98,12 +98,13 @@ var InputPage = function () {
 
      //Suggest Block
      scoreQuality: { get: function () { return element(by.css('[ng-if="$ctrl.userInput.quality !== undefined"]')); }},
-     scoreCondition: { get: function () { return element(by.css('[ng-if="$$ctrl.userInput.condition !== undefined"]')); }},
+     scoreCondition: { get: function () { return element(by.css('[ng-if="$ctrl.userInput.condition !== undefined"]')); }},
      scoreLocation: { get: function () { return element(by.css('[ng-if="$ctrl.userInput.microlocation !== undefined"]')); }},
      editScores: { get: function () { return element(by.css('[ng-click="$ctrl.slideIn()"]')); }},
-     scoreQualityField: { get: function () { return element(by.name('quality')); }},
-     scoreConditionField: { get: function () { return element(by.name('condition')); }},
-     scoreLocationField: { get: function () { return element(by.name('microlocation')); }},
+     scoreQualitySlider: { get: function () { return element(by.id('quality')); }},
+     scoreConditionSlider: { get: function () { return element(by.id('condition')); }},
+     scoreLocationSlider: { get: function () { return element(by.id('microlocation')); }},
+     saveQCL: { get: function () { return element(by.css('[ng-click="$ctrl.saveQCL()"]')); }},
 
      //Valuation Block
      getValuation: { get: function () { return element(by.css('[ng-click="$ctrl.valuate()"]')); }},
