@@ -12,8 +12,21 @@ describe('Custom scores for Input: ', function () {
     it('user lands on Input page', function () {
         allure.feature('Input page');
         page = new InputPage(page);
-        page.scoreQuality.getText().then(function(text){
-            console.log(text)
-        })
+        browser.executeScript('window.scrollTo(1300, 900);').then(function(){
+            page.scoreQuality.getText().then(function(text){
+                expect(text).toBe('0.0');
+            });
+        });
+        page.scoreCondition.getText().then(function(text){
+            expect(text).toBe('0.0');
+        });
+        page.scoreLocation.getText().then(function(text){
+            expect(text).toBe('0.0');
+        });
+
+        page.editScores.click();
+        page.setValueOfField(page.scoreQualityField, 2);
+        page.setValueOfField(page.scoreConditionField, 3);
+        page.setValueOfField(page.scoreLocationField, 4);
     });
 });
