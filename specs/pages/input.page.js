@@ -96,7 +96,8 @@ var InputPage = function () {
      highWindowsCondition: { get: function () { return element(by.css('label[for="windowsConditionHigh"]')); }},
      luxuryWindowsCondition: { get: function () { return element(by.css('label[for="windowsConditionSimple"]')); }},
 
-
+     //Suggest Block
+     scoreQuality: { get: function () { return element(by.css('[ng-if="$ctrl.userInput.quality !== undefined"]')); }},
 
      //Valuation Block
      getValuation: { get: function () { return element(by.css('[ng-click="$ctrl.valuate()"]')); }},
