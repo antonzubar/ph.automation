@@ -1,8 +1,8 @@
 'use strict';
 
-var LoginPage = require('./login.page');
-var InputPage = require('./input.page');
-var OverviewPage = require('./overview.page');
+var LoginPage = require('./pages/login.page');
+var InputPage = require('./pages/input.page');
+var OverviewPage = require('./pages/overview.page');
 
 describe('Valuation test ', function () {
     var page;
