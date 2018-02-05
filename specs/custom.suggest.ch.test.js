@@ -26,6 +26,8 @@ describe('Custom scores for Input: ', function () {
             });
         });
 
+        page.editScores.click();
+
         //Set custom QCL values by moving sliders
         browser.actions().dragAndDrop(
             page.scoreQualitySlider,
