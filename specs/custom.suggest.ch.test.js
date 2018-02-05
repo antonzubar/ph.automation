@@ -56,19 +56,17 @@ describe('Custom scores for Input: ', function () {
 
         //click save and verify that changes are saved
         page.saveQCL.click();
-        browser.waitForAngular();
+        browser.sleep(5000);
 
-        var EC = protractor.ExpectedConditions;
-        browser.wait(EC.textToBePresentInElement(page.scoreQuality, manualQuality), 5000).then(function(){
-            page.scoreQuality.getText().then(function (text) {
-                expect(text).toBe(manualQuality);
-            });
-            page.scoreCondition.getText().then(function (text) {
-                expect(text).toBe(manualCondition);
-            });
-            page.scoreLocation.getText().then(function (text) {
-                expect(text).toBe(manualLocation);
-            });
+        page.scoreQuality.getText().then(function (text) {
+            expect(+text).toBe(+manualQuality);
         });
+        page.scoreCondition.getText().then(function (text) {
+            expect(+text).toBe(+manualCondition);
+        });
+        page.scoreLocation.getText().then(function (text) {
+            expect(+text).toBe(+manualLocation);
+        });
+
     }, 24000);
 });
