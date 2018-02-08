@@ -72,3 +72,9 @@ describe('Custom scores for Input: ', function () {
 
     }, 24000);
 });
+
+it('user is logged out', function () {
+    allure.feature('Login/Logout feature');
+    page.logout();
+    page = new LoginPage();
+});
