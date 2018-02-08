@@ -6,13 +6,16 @@ var using = require('jasmine-data-provider');
 var testdata = require('./test_data/overview.ch.inheritance.testdata.js');
 var users_data = require('./test_data/users.testdata.js');
 
-var page = new LoginPage();
-page.typeLogin(users_data[0].UserName);
-page.typePassword(users_data[0].Password);
-page.loginToDash();
-
 using(testdata, function (data) {
     describe(' Inheritanse test for Apartment Input page: ', function () {
+        var page = new LoginPage();
+        it('user is logged in', function () {
+            allure.feature('Login page');
+            page.typeLogin(users_data[0].UserName);
+            page.typePassword(users_data[0].Password);
+            page.loginToDash();
+        });
+
         it(data.Case + ' all inputs are displayed correctly on Overview page', function () {
             allure.feature('Overview page');
             page = new InputPage(page);
@@ -39,7 +42,7 @@ using(testdata, function (data) {
             page.setValueOfField(page.numberOfParkingSpots, number_of_parking_spots);
 
             //Setting up additional parameters (lift etc)
-            switch(data.LIFT){
+            switch (data.LIFT) {
                 case ("1"):
                     page.liftCheckbox.isSelected().then(function (selected) {
                         if (selected == false) {
@@ -54,7 +57,8 @@ using(testdata, function (data) {
                         }
                     });
                     break;
-                default: break;
+                default:
+                    break;
             }
 
             //Scrolling down to Quality and Condition
@@ -163,12 +167,18 @@ using(testdata, function (data) {
                     expect(page.overviewLift.isPresent()).toBe(true);
                 }
             });
-        }, 240000);
 
-        it('user is returned to Input page', function () {
-            allure.feature('Navigation with Left Menu');
-            page = new LeftMenu(page);
-            page.menuItems.get(0).click();
+            it('user is returned to Input page', function () {
+                allure.feature('Navigation with Left Menu');
+                page = new LeftMenu(page);
+                page.menuItems.get(0).click();
+            });
+        }, 240000);
+        it('user is logged out', function () {
+            page = new InputPage(page);
+            allure.feature('Login/Logout feature');
+            page.logoutLink.click();
+            page = new LoginPage();
         });
     });
 });
