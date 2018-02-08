@@ -254,4 +254,10 @@ using(testdata, function (data) {
             page.menuItems.get(0).click();
         });
     });
+
+    it('user is logged out', function () {
+        allure.feature('Login/Logout feature');
+        page.logout();
+        page = new LoginPage();
+    });
 });
