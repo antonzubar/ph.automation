@@ -1,14 +1,16 @@
 var LoginPage = require('./pages/login.page');
 var InputPage = require('./pages/input.page');
-var using = require('jasmine-data-provider');
 var users_data = require('./test_data/users.testdata.js');
 
-var page = new LoginPage();
-page.typeLogin(users_data[0].UserName);
-page.typePassword(users_data[0].Password);
-page.loginToDash();
-
 describe('Custom scores for Input: ', function () {
+     var page = new LoginPage();
+        it('user is logged in', function () {
+            allure.feature('Login page');
+            page.typeLogin(users_data[0].UserName);
+            page.typePassword(users_data[0].Password);
+            page.loginToDash();
+        });
+
     it('user lands on Input page', function () {
         allure.feature('Input page');
         page = new InputPage(page);
@@ -24,24 +26,24 @@ describe('Custom scores for Input: ', function () {
             page.scoreLocation.getText().then(function (text) {
                 expect(text).toBe('0.0');
             });
+        }).then(function () {
+            page.editScores.click();
         });
-
-        page.editScores.click();
 
         //Set custom QCL values by moving sliders
         browser.actions().dragAndDrop(
             page.scoreQualitySlider,
-            {x: 22, y: 0}
+            {x: 30, y: 0}
         ).perform();
 
         browser.actions().dragAndDrop(
             page.scoreConditionSlider,
-            {x: 35, y: 0}
+            {x: 30, y: 0}
         ).perform();
 
         browser.actions().dragAndDrop(
             page.scoreLocationSlider,
-            {x: 75, y: 0}
+            {x: 30, y: 0}
         ).perform();
 
         //remember new QCL values
@@ -58,7 +60,7 @@ describe('Custom scores for Input: ', function () {
 
         //click save and verify that changes are saved
         page.saveQCL.click();
-        browser.sleep(5000);
+        browser.sleep(4000);
 
         page.scoreQuality.getText().then(function (text) {
             expect(+text).toBe(+manualQuality);
@@ -71,10 +73,10 @@ describe('Custom scores for Input: ', function () {
         });
 
     }, 24000);
-});
 
-it('user is logged out', function () {
-    allure.feature('Login/Logout feature');
-    page.logout();
-    page = new LoginPage();
+    it('user is logged out', function () {
+        allure.feature('Login/Logout feature');
+        page.logout();
+        page = new LoginPage();
+    });
 });
