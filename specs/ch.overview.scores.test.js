@@ -6,13 +6,16 @@ var using = require('jasmine-data-provider');
 var testdata = require('./test_data/ch.overview.scores.testdata.js');
 var users_data = require('./test_data/users.testdata.js');
 
-var page = new LoginPage();
-page.typeLogin(users_data[0].UserName);
-page.typePassword(users_data[0].Password);
-page.loginToDash();
-
 using(testdata, function (data) {
     describe(' Scores for overview: ', function () {
+        var page = new LoginPage();
+        it('user is logged in', function () {
+            allure.feature('Login page');
+            page.typeLogin(users_data[0].UserName);
+            page.typePassword(users_data[0].Password);
+            page.loginToDash();
+        });
+        
         it(data.Case + ' user lands on Input page', function () {
             allure.feature('Overview page');
             page = new InputPage(page);
@@ -104,100 +107,103 @@ using(testdata, function (data) {
                 if (data.KITCHEN_CONDITION == 3) {
                     page.luxuryKitchenCondition.click();
                 }
+
+                //Setting up Quality and Condition of Bathroom
+                switch (data.BATHROOM) {
+                    case '1':
+                        page.simpleBathroomQuality.click();
+                        break;
+                    case '2':
+                        page.normalBathroomQuality.click();
+                        break;
+                    case '3':
+                        page.highBathroomQuality.click();
+                        break;
+                    case '4':
+                        page.luxuryBathroomQuality.click();
+                        break;
+                    default:
+                        break;
+                }
+                switch (data.BATHROOM_CONDITION) {
+                    case '1':
+                        page.simpleBathroomCondition.click();
+                        break;
+                    case '2':
+                        page.highBathroomCondition.click();
+                        break;
+                    case '3':
+                        page.luxuryBathroomCondition.click();
+                        break;
+                    default:
+                        break;
+                }
+
+                //Setting up Quality and Condition of Floor
+                switch (data.FLOOR) {
+                    case '1':
+                        page.simpleFloorQuality.click();
+                        break;
+                    case '2':
+                        page.normalFloorQuality.click();
+                        break;
+                    case '3':
+                        page.highFloorQuality.click();
+                        break;
+                    case '4':
+                        page.luxuryFloorQuality.click();
+                        break;
+                    default:
+                        break;
+                }
+                switch (data.FLOOR_CONDITION) {
+                    case '1':
+                        page.simpleFloorCondition.click();
+                        break;
+                    case '2':
+                        page.highFloorCondition.click();
+                        break;
+                    case '3':
+                        page.luxuryFloorCondition.click();
+                        break;
+                    default:
+                        break;
+                }
+
+                //Setting up Quality and Condition of Windows
+                switch (data.WINDOWS) {
+                    case '1':
+                        page.simpleWindowsQuality.click();
+                        break;
+                    case '2':
+                        page.normalWindowsQuality.click();
+                        break;
+                    case '3':
+                        page.highWindowsQuality.click();
+                        break;
+                    case '4':
+                        page.luxuryWindowsQuality.click();
+                        break;
+                    default:
+                        break;
+                }
+                switch (data.WINDOWS_CONDITION) {
+                    case '1':
+                        page.simpleWindowsCondition.click();
+                        break;
+                    case '2':
+                        page.highWindowsCondition.click();
+                        break;
+                    case '3':
+                        page.luxuryWindowsCondition.click();
+                        break;
+                    default:
+                        break;
+                }
+            }).then(function () {
+                page.editScores.click();
+                page.saveQCL.click();
             });
-
-            //Setting up Quality and Condition of Bathroom
-            switch (data.BATHROOM) {
-                case '1':
-                    page.simpleBathroomQuality.click();
-                    break;
-                case '2':
-                    page.normalBathroomQuality.click();
-                    break;
-                case '3':
-                    page.highBathroomQuality.click();
-                    break;
-                case '4':
-                    page.luxuryBathroomQuality.click();
-                    break;
-                default:
-                    break;
-            }
-            switch (data.BATHROOM_CONDITION) {
-                case '1':
-                    page.simpleBathroomCondition.click();
-                    break;
-                case '2':
-                    page.highBathroomCondition.click();
-                    break;
-                case '3':
-                    page.luxuryBathroomCondition.click();
-                    break;
-                default:
-                    break;
-            }
-
-            //Setting up Quality and Condition of Floor
-            switch (data.FLOOR) {
-                case '1':
-                    page.simpleFloorQuality.click();
-                    break;
-                case '2':
-                    page.normalFloorQuality.click();
-                    break;
-                case '3':
-                    page.highFloorQuality.click();
-                    break;
-                case '4':
-                    page.luxuryFloorQuality.click();
-                    break;
-                default:
-                    break;
-            }
-            switch (data.FLOOR_CONDITION) {
-                case '1':
-                    page.simpleFloorCondition.click();
-                    break;
-                case '2':
-                    page.highFloorCondition.click();
-                    break;
-                case '3':
-                    page.luxuryFloorCondition.click();
-                    break;
-                default:
-                    break;
-            }
-
-            //Setting up Quality and Condition of Windows
-            switch (data.WINDOWS) {
-                case '1':
-                    page.simpleWindowsQuality.click();
-                    break;
-                case '2':
-                    page.normalWindowsQuality.click();
-                    break;
-                case '3':
-                    page.highWindowsQuality.click();
-                    break;
-                case '4':
-                    page.luxuryWindowsQuality.click();
-                    break;
-                default:
-                    break;
-            }
-            switch (data.WINDOWS_CONDITION) {
-                case '1':
-                    page.simpleWindowsCondition.click();
-                    break;
-                case '2':
-                    page.highWindowsCondition.click();
-                    break;
-                case '3':
-                    page.luxuryWindowsCondition.click();
-                    break;
-                default:
-                    break;
-            }
 
             page.getValuation.click().then(function () {
                 //Going to Overview page
@@ -245,19 +251,16 @@ using(testdata, function (data) {
                     }
                 }).then(function () {
                     page = new LeftMenu(page);
+                    page.menuItems.get(0).click();
                 });
             });
         }, 240000);
 
-        it('user is returned to Input page', function () {
-            allure.feature('Navigation with Left Menu');
-            page.menuItems.get(0).click();
+        it('user is logged out', function () {
+            allure.feature('Login/Logout feature');
+            page = new InputPage(page);
+            page.logout();
+            page = new LoginPage();
         });
-    });
-
-    it('user is logged out', function () {
-        allure.feature('Login/Logout feature');
-        page.logout();
-        page = new LoginPage();
     });
 });
