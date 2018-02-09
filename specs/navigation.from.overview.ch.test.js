@@ -9,7 +9,7 @@ var ImmissionsPage = require('./pages/immissions.page');
 var ShoppingPage = require('./pages/shopping.page');
 var FamilyPage = require('./pages/family.page');
 
-describe('Custom scores for Input: ', function () {
+describe('Navigation from Overview to Score pages: ', function () {
     var page = new LoginPage();
     it('user is logged in', function () {
         allure.feature('Login page');
