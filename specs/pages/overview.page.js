@@ -27,7 +27,9 @@ var OverviewPage = function () {
      familyScore: { get: function () { return element(by.css('[ng-if="$ctrl.familyScore"]')); }},
 
      //Market and Similar navigations
-     marketGoExplore: { get: function () { return element(by.css('[ng-click="$ctrl.goToMarket()"]')); }}
+     marketGoExplore: { get: function () { return element(by.css('[ng-click="$ctrl.goToMarket()"]')); }},
+     similarGoExplore: { get: function () { return element(by.css('[ng-click="$ctrl.goToSimilarOverview()"]')); }},
+     offersInArea: { get: function () { return element.all(by.css('[ng-click="$ctrl.handleClick()"]')); }}
 });
 
 module.exports = OverviewPage;
