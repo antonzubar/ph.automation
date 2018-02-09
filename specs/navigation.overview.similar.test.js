@@ -5,7 +5,7 @@ var users_data = require('./test_data/users.testdata.js');
 var OverviewPage = require('./pages/overview.page');
 var SimilarOffersPage = require('./pages/similar.offers.page');
 
-describe('Navigating from Overvieiw to Market page: ', function () {
+describe('Navigating from Overvieiw to Similar page: ', function () {
     var page = new LoginPage();
     it('user is logged in', function () {
         allure.feature('Login page');
