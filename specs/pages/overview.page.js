@@ -29,7 +29,8 @@ var OverviewPage = function () {
      //Market and Similar navigations
      marketGoExplore: { get: function () { return element(by.css('[ng-click="$ctrl.goToMarket()"]')); }},
      similarGoExplore: { get: function () { return element(by.css('[ng-click="$ctrl.goToSimilarOverview()"]')); }},
-     offersInArea: { get: function () { return element.all(by.css('[ng-click="$ctrl.handleClick()"]')); }}
+     offersInArea: { get: function () { return element.all(by.css('[ng-click="$ctrl.handleClick()"]')); }},
+     offersQuantityInArea: { get: function () { return element.all(by.css('[ng-if="$ctrl.cardData.quantity || $ctrl.cardData.quantity"]')); }}
 });
 
 module.exports = OverviewPage;
