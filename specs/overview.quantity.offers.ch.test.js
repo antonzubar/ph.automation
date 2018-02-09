@@ -83,6 +83,7 @@ describe(' Comparing offers quantity between Overview and Similar Offers pages',
 
     it('user is logged out', function () {
         allure.feature('Login/Logout feature');
+        page = new InputPage(page);
         page.logout();
         page = new LoginPage();
     });
