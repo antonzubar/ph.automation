@@ -47,7 +47,7 @@ describe('Navigation from Overview to Score pages: ', function () {
 
             //Navigate to View page
             page = new OverviewPage(page);
-            
+
             page.viewScore.click().then(function () {
                 page = new ViewPage(page);
                 page.viewLabel.getText().then(function (text) {
@@ -95,7 +95,7 @@ describe('Navigation from Overview to Score pages: ', function () {
             });
         });
     }, 240000);
-    
+
     it('user is logged out', function () {
      allure.feature('Login/Logout feature');
      page.logout();
