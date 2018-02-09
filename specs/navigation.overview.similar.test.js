@@ -66,9 +66,10 @@ describe('Navigating from Overvieiw to Similar page: ', function () {
     }, 240000);
 
     it('user is logged out', function () {
-     allure.feature('Login/Logout feature');
-     page.logout();
-     page = new LoginPage();
-     });
+        allure.feature('Login/Logout feature');
+        page = new InputPage(page);
+        page.logout();
+        page = new LoginPage();
+    });
 });
 
