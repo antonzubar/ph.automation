@@ -24,7 +24,10 @@ var OverviewPage = function () {
      viewScore: { get: function () { return element(by.css('[ng-if="$ctrl.viewScore"]')); }},
      immisionsScore: { get: function () { return element(by.css('[ng-if="$ctrl.immisionsScore"]')); }},
      shoppingScore: { get: function () { return element(by.css('[ng-if="$ctrl.shoppingScore"]')); }},
-     familyScore: { get: function () { return element(by.css('[ng-if="$ctrl.familyScore"]')); }}
+     familyScore: { get: function () { return element(by.css('[ng-if="$ctrl.familyScore"]')); }},
+
+     //Market and Similar navigations
+     marketGoExplore: { get: function () { return element(by.css('[ng-click="$ctrl.goToMarket()"]')); }}
 });
 
 module.exports = OverviewPage;
