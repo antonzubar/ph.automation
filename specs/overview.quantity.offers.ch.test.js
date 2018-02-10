@@ -28,6 +28,7 @@ describe(' Comparing offers quantity between Overview and Similar Offers pages',
         browser.executeScript('window.scrollTo(100000, 100000);').then(function () {
             page.editScores.click();
             page.saveQCL.click();
+            browser.waitForAngular();
         });
         page.getValuation.click().then(function () {
             page = new OverviewPage(page);
