@@ -9,8 +9,8 @@ var users_data = require('./test_data/users.testdata.js');
 using(testdata, function (data) {
     describe(' Inheritanse test for Apartment Input page: ', function () {
         var page = new LoginPage();
-        it('user is logged in', function () {
-            allure.feature('Login page');
+        
+        beforeEach(function () {
             page.typeLogin(users_data[0].UserName);
             page.typePassword(users_data[0].Password);
             page.loginToDash();
@@ -174,9 +174,9 @@ using(testdata, function (data) {
                 page.menuItems.get(0).click();
             });
         }, 240000);
-        it('user is logged out', function () {
+
+        afterEach(function () {
             page = new InputPage(page);
-            allure.feature('Login/Logout feature');
             page.logoutLink.click();
             page = new LoginPage();
         });
