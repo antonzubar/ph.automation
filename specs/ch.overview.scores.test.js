@@ -9,8 +9,8 @@ var users_data = require('./test_data/users.testdata.js');
 using(testdata, function (data) {
     describe(' Scores for overview: ', function () {
         var page = new LoginPage();
-        it('user is logged in', function () {
-            allure.feature('Login page');
+
+        beforeEach(function () {
             page.typeLogin(users_data[0].UserName);
             page.typePassword(users_data[0].Password);
             page.loginToDash();
@@ -256,8 +256,7 @@ using(testdata, function (data) {
             });
         }, 240000);
 
-        it('user is logged out', function () {
-            allure.feature('Login/Logout feature');
+        afterEach(function () {
             page = new InputPage(page);
             page.logout();
             page = new LoginPage();
