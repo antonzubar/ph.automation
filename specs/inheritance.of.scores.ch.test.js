@@ -11,8 +11,8 @@ var FamilyPage = require('./pages/family.page');
 
 describe('Navigation from Overview to Score pages: ', function () {
     var page = new LoginPage();
-    it('user is logged in', function () {
-        allure.feature('Login page');
+
+    beforeEach(function () {
         page.typeLogin(users_data[0].UserName);
         page.typePassword(users_data[0].Password);
         page.loginToDash();
@@ -39,7 +39,7 @@ describe('Navigation from Overview to Score pages: ', function () {
             //variable for values of Scores
             var noiseScoreValue, viewScoreValue, immisionsScoreValue, shoppingScoreValue, familyScoreValue;
 
-            page.noiseScore.getText().then(function(text){
+            page.noiseScore.getText().then(function (text) {
                 noiseScoreValue = text;
             });
             page.noiseScore.click().then(function () {
@@ -55,7 +55,7 @@ describe('Navigation from Overview to Score pages: ', function () {
             //Navigate to View page
             page = new OverviewPage(page);
 
-            page.viewScore.getText().then(function(text){
+            page.viewScore.getText().then(function (text) {
                 viewScoreValue = text;
             });
             page.viewScore.click().then(function () {
@@ -71,7 +71,7 @@ describe('Navigation from Overview to Score pages: ', function () {
             //Navigate to Immissions page
             page = new OverviewPage(page);
 
-            page.immisionsScore.getText().then(function(text){
+            page.immisionsScore.getText().then(function (text) {
                 immisionsScoreValue = text;
             });
             page.immisionsScore.click().then(function () {
@@ -87,7 +87,7 @@ describe('Navigation from Overview to Score pages: ', function () {
             //Navigate to Shopping page
             page = new OverviewPage(page);
 
-            page.shoppingScore.getText().then(function(text){
+            page.shoppingScore.getText().then(function (text) {
                 shoppingScoreValue = text;
             });
             page.shoppingScore.click().then(function () {
@@ -103,7 +103,7 @@ describe('Navigation from Overview to Score pages: ', function () {
             //Navigate to Family page
             page = new OverviewPage(page);
 
-            page.familyScore.getText().then(function(text){
+            page.familyScore.getText().then(function (text) {
                 familyScoreValue = text;
             });
             page.familyScore.click().then(function () {
@@ -119,9 +119,8 @@ describe('Navigation from Overview to Score pages: ', function () {
         });
     }, 240000);
 
-    it('user is logged out', function () {
-     allure.feature('Login/Logout feature');
-     page.logout();
-     page = new LoginPage();
-     });
+    afterEach(function () {
+        page.logout();
+        page = new LoginPage();
+    });
 });
