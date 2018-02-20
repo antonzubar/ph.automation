@@ -16,8 +16,6 @@ var OverviewPage = function () {
      overviewNumberOfGarages: { get: function () { return element(by.css('[ng-if="$ctrl.propertyProps.numberOfGarages >= 0"]')); }},
      overviewNumberOfParkingSpots: { get: function () { return element(by.css('[ng-if="$ctrl.propertyProps.numberOfParkingSpots >= 0"]')); }},
      overviewLift: { get: function () { return element(by.css('[ng-if="!$ctrl.isHouse && $ctrl.propertyProps.lift"]')); }},
-     //Move this to another .page
-     leftMenuInput: { get: function () { return element(by.xpath('/html/body/div[1]/div/ui-view/aside/main-menu/nav/ul/li[1]/a')); }},
 
      //Overview Scores
      noiseScore: { get: function () { return element(by.css('[ng-if="$ctrl.noiseScore"]')); }},
