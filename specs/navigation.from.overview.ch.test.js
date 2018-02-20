@@ -11,8 +11,8 @@ var FamilyPage = require('./pages/family.page');
 
 describe('Navigation from Overview to Score pages: ', function () {
     var page = new LoginPage();
-    it('user is logged in', function () {
-        allure.feature('Login page');
+
+    beforeEach(function () {
         page.typeLogin(users_data[0].UserName);
         page.typePassword(users_data[0].Password);
         page.loginToDash();
@@ -96,9 +96,8 @@ describe('Navigation from Overview to Score pages: ', function () {
         });
     }, 240000);
 
-    it('user is logged out', function () {
-     allure.feature('Login/Logout feature');
-     page.logout();
-     page = new LoginPage();
-     });
+    afterEach(function () {
+        page.logout();
+        page = new LoginPage();
+    });
 });
