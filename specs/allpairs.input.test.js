@@ -7,8 +7,8 @@ var users_data = require('./test_data/users.testdata.js');
 using(testdata, function (data) {
     describe(' All-Pairs test for Apartment Input page: ', function () {
         var page = new LoginPage();
-        it('user is logged in', function () {
-            allure.feature('Login page');
+
+        beforeEach(function () {
             page.typeLogin(users_data[0].UserName);
             page.typePassword(users_data[0].Password);
             page.loginToDash();
@@ -197,8 +197,7 @@ using(testdata, function (data) {
             }
         });
         
-        it('user is logged out', function () {
-            allure.feature('Login page');
+        afterEach(function () {
             page.logout();
             page = new LoginPage();
         });
