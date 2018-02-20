@@ -3,13 +3,14 @@ var InputPage = require('./pages/input.page');
 var users_data = require('./test_data/users.testdata.js');
 
 describe('Custom scores for Input: ', function () {
-     var page = new LoginPage();
+    var page = new LoginPage();
+    var manualQuality, manualCondition, manualLocation;
 
-        beforeEach(function () {
-            page.typeLogin(users_data[0].UserName);
-            page.typePassword(users_data[0].Password);
-            page.loginToDash();
-        });
+    beforeAll(function () {
+        page.typeLogin(users_data[0].UserName);
+        page.typePassword(users_data[0].Password);
+        page.loginToDash();
+    });
 
     it('user lands on Input page', function () {
         allure.feature('Input page');
@@ -17,16 +18,6 @@ describe('Custom scores for Input: ', function () {
 
         //Scroll down and verify that initial values are 0.
         browser.executeScript('window.scrollTo(100000, 100000);').then(function () {
-            page.scoreQuality.getText().then(function (text) {
-                expect(text).toBe('0.0');
-            });
-            page.scoreCondition.getText().then(function (text) {
-                expect(text).toBe('0.0');
-            });
-            page.scoreLocation.getText().then(function (text) {
-                expect(text).toBe('0.0');
-            });
-        }).then(function () {
             page.editScores.click();
         });
 
@@ -46,8 +37,7 @@ describe('Custom scores for Input: ', function () {
             {x: 30, y: 0}
         ).perform();
 
-        //remember new QCL values
-        var manualQuality, manualCondition, manualLocation;
+        //remember new QCL values        
         page.scoreQualitySlider.getAttribute('aria-valuenow').then(function (text) {
             manualQuality = text;
         });
@@ -61,20 +51,27 @@ describe('Custom scores for Input: ', function () {
         //click save and verify that changes are saved
         page.saveQCL.click();
         browser.sleep(4000);
+    }, 24000);
 
+    it('Custom Quality Score is saved', function () {
         page.scoreQuality.getText().then(function (text) {
             expect(+text).toBe(+manualQuality);
         });
+    });
+
+    it('Custom Condition Score is saved', function () {
         page.scoreCondition.getText().then(function (text) {
             expect(+text).toBe(+manualCondition);
         });
+    });
+
+    it('Custom Location Score is saved', function () {
         page.scoreLocation.getText().then(function (text) {
             expect(+text).toBe(+manualLocation);
         });
+    });
 
-    }, 24000);
-
-    afterEach(function () {
+    afterAll(function () {
         page.logout();
         page = new LoginPage();
     });
