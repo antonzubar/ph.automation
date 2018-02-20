@@ -7,8 +7,8 @@ var SimilarOffersPage = require('./pages/similar.offers.page');
 
 describe('Navigating from Overvieiw to Similar page: ', function () {
     var page = new LoginPage();
-    it('user is logged in', function () {
-        allure.feature('Login page');
+
+    beforeEach(function () {
         page.typeLogin(users_data[0].UserName);
         page.typePassword(users_data[0].Password);
         page.loginToDash();
@@ -65,8 +65,7 @@ describe('Navigating from Overvieiw to Similar page: ', function () {
         });
     }, 240000);
 
-    it('user is logged out', function () {
-        allure.feature('Login/Logout feature');
+    afterEach(function () {
         page = new InputPage(page);
         page.logout();
         page = new LoginPage();
