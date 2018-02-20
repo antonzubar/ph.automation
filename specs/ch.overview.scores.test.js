@@ -10,12 +10,12 @@ using(testdata, function (data) {
     describe(' Scores for overview: ', function () {
         var page = new LoginPage();
 
-        beforeEach(function () {
+        beforeAll(function () {
             page.typeLogin(users_data[0].UserName);
             page.typePassword(users_data[0].Password);
             page.loginToDash();
         });
-        
+
         it(data.Case + ' user lands on Input page', function () {
             allure.feature('Overview page');
             page = new InputPage(page);
@@ -204,11 +204,14 @@ using(testdata, function (data) {
                 page.editScores.click();
                 page.saveQCL.click();
             });
+        }, 240000);
 
+        //Checking Noise page
+        it(data.Case + 'Check Noise score has sane value', function () {
             page.getValuation.click().then(function () {
                 //Going to Overview page
                 page = new OverviewPage(page);
-                //Verify Noise Value is valid
+
                 page.noiseScore.getText().then(function (text) {
                     noiseScoreNumber = Number(text);
                     browser.waitForAngular();
@@ -218,45 +221,61 @@ using(testdata, function (data) {
                         expect('Test is passed').toBe('Failed');
                     }
                 });
-                page.viewScore.getText().then(function (text) {
-                    viewScoreNumber = Number(text);
-                    if (1 < viewScoreNumber && viewScoreNumber <= 5) {
-                        expect('Test is passed').toBe('Test is passed');
-                    } else {
-                        expect('Test is passed').toBe('Failed');
-                    }
-                });
-                page.immisionsScore.getText().then(function (text) {
-                    immisionsScoreNumber = Number(text);
-                    if (1 < immisionsScoreNumber && immisionsScoreNumber <= 5) {
-                        expect('Test is passed').toBe('Test is passed');
-                    } else {
-                        expect('Test is passed').toBe('Failed');
-                    }
-                });
-                page.shoppingScore.getText().then(function (text) {
-                    shoppingScoreNumber = Number(text);
-                    if (1 <= shoppingScoreNumber && shoppingScoreNumber <= 5) {
-                        expect('Test is passed').toBe('Test is passed');
-                    } else {
-                        expect('Test is passed').toBe('Failed');
-                    }
-                });
-                page.familyScore.getText().then(function (text) {
-                    familyScoreNumber = Number(text);
-                    if (1 < familyScoreNumber && familyScoreNumber <= 5) {
-                        expect('Test is passed').toBe('Test is passed');
-                    } else {
-                        expect('Test is passed').toBe('Failed');
-                    }
-                }).then(function () {
-                    page = new LeftMenu(page);
-                    page.menuItems.get(0).click();
-                });
             });
-        }, 240000);
+        });
 
-        afterEach(function () {
+        //Checking View page
+        it(data.Case + 'Check View score has sane value', function () {
+            page.viewScore.getText().then(function (text) {
+                viewScoreNumber = Number(text);
+                if (1 < viewScoreNumber && viewScoreNumber <= 5) {
+                    expect('Test is passed').toBe('Test is passed');
+                } else {
+                    expect('Test is passed').toBe('Failed');
+                }
+            });
+        });
+
+        //Checking Immisions page
+        it(data.Case + 'Check Immisions score has sane value', function () {
+            page.immisionsScore.getText().then(function (text) {
+                immisionsScoreNumber = Number(text);
+                if (1 < immisionsScoreNumber && immisionsScoreNumber <= 5) {
+                    expect('Test is passed').toBe('Test is passed');
+                } else {
+                    expect('Test is passed').toBe('Failed');
+                }
+            });
+        });
+
+        //Checking Shopping score
+        it(data.Case + 'Check Shopping score has sane value', function () {
+            page.shoppingScore.getText().then(function (text) {
+                shoppingScoreNumber = Number(text);
+                if (1 <= shoppingScoreNumber && shoppingScoreNumber <= 5) {
+                    expect('Test is passed').toBe('Test is passed');
+                } else {
+                    expect('Test is passed').toBe('Failed');
+                }
+            });
+        });
+
+        //Checking Family score
+        it(data.Case + 'Check Family score has sane value', function () {
+            page.familyScore.getText().then(function (text) {
+                familyScoreNumber = Number(text);
+                if (1 < familyScoreNumber && familyScoreNumber <= 5) {
+                    expect('Test is passed').toBe('Test is passed');
+                } else {
+                    expect('Test is passed').toBe('Failed');
+                }
+            }).then(function () {
+                page = new LeftMenu(page);
+                page.menuItems.get(0).click();
+            });
+        });
+
+        afterAll(function () {
             page = new InputPage(page);
             page.logout();
             page = new LoginPage();
