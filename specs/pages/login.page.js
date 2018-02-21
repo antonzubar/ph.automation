@@ -5,6 +5,7 @@ var LoginPage = function () {
 };
 
  LoginPage.prototype = Object.create({}, {
+    loginForm: { get: function () { return element(by.name('dibLoginForm')); }},
     login: { get: function () { return element(by.model('username')); }},
     password: { get: function () { return element(by.model('password')); }},
     loginButton: { get: function () { return element(by.buttonText("Login")); }},
