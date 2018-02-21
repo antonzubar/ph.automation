@@ -14,14 +14,16 @@ using(testdata, function (data) {
             expect(browser.getTitle()).toEqual('Login | dash');
         });
 
-        it('user logins to Swiss dash', function () {
+        it(' user logins to Swiss dash', function () {
             allure.feature('Login/Logout feature');
             page.typeLogin(data.UserName);
             page.typePassword(data.Password);
             page.loginToDash();
 
             expect(browser.getTitle()).toEqual(data.PageTitle);
+        });
 
+        it(' Check that address is default ', function () {
             page = new InputPage(page);
             page.address.isPresent().then(function (result) {
                 if (result) {
@@ -30,12 +32,11 @@ using(testdata, function (data) {
             });
         });
 
-        it('user is logged out', function () {
+        it(' user is logged out', function () {
             allure.feature('Login/Logout feature');
             page.logout();
             page = new LoginPage();
-            expect(page.login.isPresent()).toBe(true);
-            expect(page.password.isPresent()).toBe(true);
+            expect(page.loginForm.isPresent()).toBe(true);
         });
     });
 });
