@@ -11,14 +11,16 @@ var FamilyPage = require('./pages/family.page');
 
 describe('Navigation from Overview to Score pages: ', function () {
     var page = new LoginPage();
+    var noiseScoreValue, viewScoreValue, immisionsScoreValue, shoppingScoreValue, familyScoreValue;
+    var EC = protractor.ExpectedConditions;
 
-    beforeEach(function () {
+    beforeAll(function () {
         page.typeLogin(users_data[0].UserName);
         page.typePassword(users_data[0].Password);
         page.loginToDash();
     });
 
-    it(' User navigates through Scores pages', function () {
+    it(' User navigates to Overview page', function () {
         allure.feature('Input page');
         page = new InputPage(page);
 
@@ -29,97 +31,108 @@ describe('Navigation from Overview to Score pages: ', function () {
 
         //Scroll down and verify that initial values are 0.
         browser.executeScript('window.scrollTo(100000, 100000);').then(function () {
-            page.editScores.click();
-            page.saveQCL.click();
+            browser.wait(EC.elementToBeClickable(page.getValuation), 5000);
         });
         page.getValuation.click().then(function () {
             page = new OverviewPage(page);
-
-            //Navigate to Noise page
-            //variable for values of Scores
-            var noiseScoreValue, viewScoreValue, immisionsScoreValue, shoppingScoreValue, familyScoreValue;
+            browser.wait(EC.visibilityOf(page.similarGoExplore), 10000);
 
             page.noiseScore.getText().then(function (text) {
                 noiseScoreValue = text;
             });
-            page.noiseScore.click().then(function () {
-                page = new NoisePage;
-                page.quietScore.getText().then(function (text) {
-                    expect(String(text)).toBe(String(noiseScoreValue));
-                    console.log(String(text) + "= " + noiseScoreValue); //delete logs
-                    page = new LeftMenu(page);
-                    page.menuItems.get(1).click();
-                })
-            });
-
-            //Navigate to View page
-            page = new OverviewPage(page);
 
             page.viewScore.getText().then(function (text) {
                 viewScoreValue = text;
             });
-            page.viewScore.click().then(function () {
-                page = new ViewPage(page);
-                page.viewScore.getText().then(function (text) {
-                    expect(String(text)).toBe(String(viewScoreValue));
-                    console.log(String(text) + "= " + viewScoreValue); //delete logs
-                    page = new LeftMenu(page);
-                    page.menuItems.get(1).click();
-                })
-            });
-
-            //Navigate to Immissions page
-            page = new OverviewPage(page);
 
             page.immisionsScore.getText().then(function (text) {
                 immisionsScoreValue = text;
             });
-            page.immisionsScore.click().then(function () {
-                page = new ImmissionsPage(page);
-                page.immissionsScore.getText().then(function (text) {
-                    expect(String(text)).toBe(String(immisionsScoreValue));
-                    console.log(String(text) + "= " + immisionsScoreValue); //delete logs
-                    page = new LeftMenu(page);
-                    page.menuItems.get(1).click();
-                })
-            });
-
-            //Navigate to Shopping page
-            page = new OverviewPage(page);
 
             page.shoppingScore.getText().then(function (text) {
                 shoppingScoreValue = text;
             });
-            page.shoppingScore.click().then(function () {
-                page = new ShoppingPage(page);
-                page.shoppingScore.getText().then(function (text) {
-                    expect(String(text)).toBe(String(shoppingScoreValue));
-                    console.log(String(text) + "= " + shoppingScoreValue); //delete logs
-                    page = new LeftMenu(page);
-                    page.menuItems.get(1).click();
-                })
-            });
-
-            //Navigate to Family page
-            page = new OverviewPage(page);
 
             page.familyScore.getText().then(function (text) {
                 familyScoreValue = text;
             });
-            page.familyScore.click().then(function () {
-                page = new FamilyPage(page);
-                page.familyScore.getText().then(function (text) {
-                    expect(String(text)).toBe(String(familyScoreValue));
-                    console.log(String(text) + "= " + familyScoreValue); //delete logs
-                    page = new LeftMenu(page);
-                    page.menuItems.get(0).click();
-                    page = new InputPage(page);
-                })
-            });
+        });        
+    }, 240000);
+
+    it('Navigate to Noise page', function () {
+        //Navigate to Noise page
+        //variable for values of Scores
+
+        page.noiseScore.click().then(function () {
+            page = new NoisePage;
+            browser.wait(EC.textToBePresentInElement(page.quietScore, String(noiseScoreValue)), 10000);
+            page.quietScore.getText().then(function (text) {
+                expect(Number(text)).toBe(Number(noiseScoreValue));
+                page = new LeftMenu(page);
+                page.menuItems.get(1).click();
+            })
         });
     }, 240000);
 
-    afterEach(function () {
+    it('Navigate to View page', function () {
+        //Navigate to View page
+        page = new OverviewPage(page);
+        page.viewScore.click().then(function () {
+            page = new ViewPage(page);
+            browser.wait(EC.textToBePresentInElement(page.viewScore, String(viewScoreValue)), 10000);
+            page.viewScore.getText().then(function (text) {
+                expect(Number(text)).toBe(Number(viewScoreValue));
+                page = new LeftMenu(page);
+                page.menuItems.get(1).click();
+            })
+        });
+    }, 240000);
+
+    it('Navigate to Immisions page', function () {
+        //Navigate to Immissions page
+        page = new OverviewPage(page);
+        page.immisionsScore.click().then(function () {
+            page = new ImmissionsPage(page);
+            browser.wait(EC.textToBePresentInElement(page.immissionsScore, String(immisionsScoreValue)), 10000);
+            page.immissionsScore.getText().then(function (text) {
+                expect(Number(text)).toBe(Number(immisionsScoreValue));
+                page = new LeftMenu(page);
+                page.menuItems.get(1).click();
+            })
+        });
+    }, 240000);
+
+    it('Navigate to Shopping page', function () {
+        //Navigate to Shopping page
+        page = new OverviewPage(page);
+        page.shoppingScore.click().then(function () {
+            page = new ShoppingPage(page);
+            browser.wait(EC.textToBePresentInElement(page.shoppingScore, String(shoppingScoreValue)), 10000);
+            page.shoppingScore.getText().then(function (text) {
+                expect(Number(text)).toBe(Number(shoppingScoreValue));
+                page = new LeftMenu(page);
+                page.menuItems.get(1).click();
+            })
+        });
+    }, 240000);
+
+    it('Navigate to Family page', function () {
+        //Navigate to Family page
+        page = new OverviewPage(page);
+
+        page.familyScore.click().then(function () {
+            page = new FamilyPage(page);
+            browser.wait(EC.textToBePresentInElement(page.familyScore, String(familyScoreValue)), 10000);
+            page.familyScore.getText().then(function (text) {
+                expect(Number(text)).toBe(Number(familyScoreValue));
+                page = new LeftMenu(page);
+                page.menuItems.get(0).click();
+            })
+        });
+    }, 240000);
+
+    afterAll(function () {
+        page = new InputPage(page);
         page.logout();
         page = new LoginPage();
     });
