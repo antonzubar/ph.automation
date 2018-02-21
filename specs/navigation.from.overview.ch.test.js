@@ -11,14 +11,15 @@ var FamilyPage = require('./pages/family.page');
 
 describe('Navigation from Overview to Score pages: ', function () {
     var page = new LoginPage();
+    var EC = protractor.ExpectedConditions;
 
-    beforeEach(function () {
+    beforeAll(function () {
         page.typeLogin(users_data[0].UserName);
         page.typePassword(users_data[0].Password);
         page.loginToDash();
     });
 
-    it(' User navigates through Scores pages', function () {
+    it(' User logins and go to Noise page', function () {
         allure.feature('Input page');
         page = new InputPage(page);
 
@@ -29,8 +30,7 @@ describe('Navigation from Overview to Score pages: ', function () {
 
         //Scroll down and verify that initial values are 0.
         browser.executeScript('window.scrollTo(100000, 100000);').then(function () {
-            page.editScores.click();
-            page.saveQCL.click();
+            browser.wait(EC.elementToBeClickable(page.getValuation), 5000);
         });
         page.getValuation.click().then(function () {
             page = new OverviewPage(page);
@@ -45,58 +45,67 @@ describe('Navigation from Overview to Score pages: ', function () {
                 })
             });
 
-            //Navigate to View page
-            page = new OverviewPage(page);
-
-            page.viewScore.click().then(function () {
-                page = new ViewPage(page);
-                page.viewLabel.getText().then(function (text) {
-                    expect(String(text)).toBe('Aussicht');
-                    page = new LeftMenu(page);
-                    page.menuItems.get(1).click();
-                })
-            });
-
-            //Navigate to Immissions page
-            page = new OverviewPage(page);
-
-            page.immisionsScore.click().then(function () {
-                page = new ImmissionsPage(page);
-                page.immissionsLabel.getText().then(function (text) {
-                    expect(String(text)).toBe('Immissionen');
-                    page = new LeftMenu(page);
-                    page.menuItems.get(1).click();
-                })
-            });
-
-            //Navigate to Shopping page
-            page = new OverviewPage(page);
-
-            page.shoppingScore.click().then(function () {
-                page = new ShoppingPage(page);
-                page.shoppingLabel.getText().then(function (text) {
-                    expect(String(text)).toBe('Einkaufen');
-                    page = new LeftMenu(page);
-                    page.menuItems.get(1).click();
-                })
-            });
-
-            //Navigate to Family page
-            page = new OverviewPage(page);
-
-            page.familyScore.click().then(function () {
-                page = new FamilyPage(page);
-                page.familyLabel.getText().then(function (text) {
-                    expect(String(text)).toBe('Familie & Bildung');
-                    page = new LeftMenu(page);
-                    page.menuItems.get(0).click();
-                    page = new InputPage(page);
-                })
-            });
         });
     }, 240000);
 
-    afterEach(function () {
+    it('Check that user navigates to View page', function () {
+        //Navigate to View page
+        page = new OverviewPage(page);
+
+        page.viewScore.click().then(function () {
+            page = new ViewPage(page);
+            page.viewLabel.getText().then(function (text) {
+                expect(String(text)).toBe('Aussicht');
+                page = new LeftMenu(page);
+                page.menuItems.get(1).click();
+            })
+        });
+    });
+
+    it('Check that user navigates to Immisions page', function () {
+        //Navigate to Immissions page
+        page = new OverviewPage(page);
+
+        page.immisionsScore.click().then(function () {
+            page = new ImmissionsPage(page);
+            page.immissionsLabel.getText().then(function (text) {
+                expect(String(text)).toBe('Immissionen');
+                page = new LeftMenu(page);
+                page.menuItems.get(1).click();
+            })
+        });
+    });
+
+    it('Check that user navigates to Shopping page', function () {
+        //Navigate to Shopping page
+        page = new OverviewPage(page);
+
+        page.shoppingScore.click().then(function () {
+            page = new ShoppingPage(page);
+            page.shoppingLabel.getText().then(function (text) {
+                expect(String(text)).toBe('Einkaufen');
+                page = new LeftMenu(page);
+                page.menuItems.get(1).click();
+            })
+        });
+    });
+
+    it('Check that user navigates to Shopping page', function () {
+        //Navigate to Family page
+        page = new OverviewPage(page);
+
+        page.familyScore.click().then(function () {
+            page = new FamilyPage(page);
+            page.familyLabel.getText().then(function (text) {
+                expect(String(text)).toBe('Familie & Bildung');
+                page = new LeftMenu(page);
+                page.menuItems.get(0).click();
+            })
+        });
+    });
+
+    afterAll(function () {
+        page = new InputPage(page);
         page.logout();
         page = new LoginPage();
     });
