@@ -7,6 +7,7 @@ var MarketPage = require('./pages/market.page');
 
 describe('Navigating from Overvieiw to Market page: ', function () {
     var page = new LoginPage();
+    var EC = protractor.ExpectedConditions;
 
     beforeEach(function () {
         page.typeLogin(users_data[0].UserName);
@@ -25,8 +26,7 @@ describe('Navigating from Overvieiw to Market page: ', function () {
 
         //Scroll down and verify that initial values are 0.
         browser.executeScript('window.scrollTo(100000, 100000);').then(function () {
-            page.editScores.click();
-            page.saveQCL.click();
+            browser.wait(EC.elementToBeClickable(page.getValuation), 5000);
         });
         page.getValuation.click().then(function () {
             page = new OverviewPage(page);
