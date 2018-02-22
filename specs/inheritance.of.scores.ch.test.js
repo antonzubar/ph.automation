@@ -20,7 +20,7 @@ describe('Navigation from Overview to Score pages: ', function () {
         page.loginToDash();
     });
 
-    it(' User navigates to Overview page', function () {
+    it(' User Navigates to Noise page', function () {
         allure.feature('Input page');
         page = new InputPage(page);
 
@@ -56,21 +56,18 @@ describe('Navigation from Overview to Score pages: ', function () {
             page.familyScore.getText().then(function (text) {
                 familyScoreValue = text;
             });
-        });        
-    }, 240000);
 
-    it('Navigate to Noise page', function () {
-        //Navigate to Noise page
-        //variable for values of Scores
-
-        page.noiseScore.click().then(function () {
-            page = new NoisePage;
-            browser.wait(EC.textToBePresentInElement(page.quietScore, String(noiseScoreValue)), 10000);
-            page.quietScore.getText().then(function (text) {
-                expect(Number(text)).toBe(Number(noiseScoreValue));
-                page = new LeftMenu(page);
-                page.menuItems.get(1).click();
-            })
+            //Navigate to Noise page
+            //variable for values of Scores
+            page.noiseScore.click().then(function () {
+                page = new NoisePage;
+                browser.wait(EC.textToBePresentInElement(page.quietScore, String(noiseScoreValue)), 10000);
+                page.quietScore.getText().then(function (text) {
+                    expect(Number(text)).toBe(Number(noiseScoreValue));
+                    page = new LeftMenu(page);
+                    page.menuItems.get(1).click();
+                })
+            });
         });
     }, 240000);
 
