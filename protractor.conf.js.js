@@ -7,8 +7,8 @@ exports.config = {
     },
     framework: 'jasmine2',
     //seleniumAddress: 'http://localhost:4444/wd/hub',  //this creates standalone server which will alive after tests
-    specs: ['./specs/*test.js'],  //valuation.test.js
-    baseUrl: '', //add here URL for testing
+    specs: ['./specs/ch.overview.scores.test.js'],  //specify scope of tests
+    baseUrl: 'https://xdash.pricehubble.net/login', //add here URL for testing
 //------------------ Delete folder with previous results before launch---------------------
     beforeLaunch: function () {
         var del = require('del');
