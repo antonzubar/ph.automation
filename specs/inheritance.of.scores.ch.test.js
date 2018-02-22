@@ -12,7 +12,6 @@ var FamilyPage = require('./pages/family.page');
 describe('Navigation from Overview to Score pages: ', function () {
     var page = new LoginPage();
     var noiseScoreValue, viewScoreValue, immisionsScoreValue, shoppingScoreValue, familyScoreValue;
-    var EC = protractor.ExpectedConditions;
 
     beforeAll(function () {
         page.typeLogin(users_data[0].UserName);
