@@ -2,6 +2,7 @@
 
 var InputPage = function () {
 };
+var EC = protractor.ExpectedConditions;
 
  InputPage.prototype = Object.create({}, {
     //---------------------------Info Pane objects-------------------------------------------------
@@ -108,6 +109,13 @@ var InputPage = function () {
 
      //Valuation Block
      getValuation: { get: function () { return element(by.css('[ng-click="$ctrl.valuate()"]')); }},
+     
+     //Function to click button with EC
+     clickButton: { value: function (webelement) {
+            browser.wait(EC.elementToBeClickable(webelement), 5000);
+            return webelement.click();
+        }
+     },
 
 
     //navigation menu objects
