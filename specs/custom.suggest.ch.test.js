@@ -12,7 +12,7 @@ describe('Custom scores for Input: ', function () {
         page.loginToDash();
     });
 
-    it('user lands on Input page', function () {
+    it(' Custom Quality Score is saved', function () {
         allure.feature('Input page');
         page = new InputPage(page);
 
@@ -51,13 +51,11 @@ describe('Custom scores for Input: ', function () {
         //click save and verify that changes are saved
         page.saveQCL.click();
         browser.sleep(4000);
-    }, 24000);
 
-    it('Custom Quality Score is saved', function () {
         page.scoreQuality.getText().then(function (text) {
             expect(+text).toBe(+manualQuality);
         });
-    });
+    }, 24000);
 
     it('Custom Condition Score is saved', function () {
         page.scoreCondition.getText().then(function (text) {
