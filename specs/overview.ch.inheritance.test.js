@@ -9,8 +9,16 @@ var users_data = require('./test_data/users.testdata.js');
 using(testdata, function (data) {
     describe(' Inheritanse test for Apartment Input page: ', function () {
         var page = new LoginPage();
-        
-        beforeEach(function () {
+        var building_year,
+            living_area, 
+            floor_number, 
+            numbers_of_rooms, 
+            numbers_of_bathrooms, 
+            balcony_area, 
+            number_of_garages, 
+            number_of_parking_spots;
+
+        beforeAll(function () {
             page.typeLogin(users_data[0].UserName);
             page.typePassword(users_data[0].Password);
             page.loginToDash();
@@ -22,14 +30,14 @@ using(testdata, function (data) {
 
             //Setting Up text fields
             //Get random values according to JSON ALL PAIR data.
-            var building_year = page.getRandomInteger(data.BUILDING_YEAR);
-            var living_area = page.getRandomInteger(data.NET_LIVING_AREA);
-            var floor_number = page.getRandomInteger(data.FLOOR_NUMBER);
-            var numbers_of_rooms = page.getRandomInteger(data.NUMBERS_OF_ROOMS);
-            var numbers_of_bathrooms = page.getRandomInteger(data.NUMBERS_OF_BATHROOMS);
-            var balcony_area = page.getRandomInteger(data.BALCONY_TERRACE);
-            var number_of_garages = page.getRandomInteger(data.GARAGE);
-            var number_of_parking_spots = page.getRandomInteger(data.PARKING_SPACE);
+            building_year = page.getRandomInteger(data.BUILDING_YEAR);
+            living_area = page.getRandomInteger(data.NET_LIVING_AREA);
+            floor_number = page.getRandomInteger(data.FLOOR_NUMBER);
+            numbers_of_rooms = page.getRandomInteger(data.NUMBERS_OF_ROOMS);
+            numbers_of_bathrooms = page.getRandomInteger(data.NUMBERS_OF_BATHROOMS);
+            balcony_area = page.getRandomInteger(data.BALCONY_TERRACE);
+            number_of_garages = page.getRandomInteger(data.GARAGE);
+            number_of_parking_spots = page.getRandomInteger(data.PARKING_SPACE);
 
             //Choose field and set value from JSON ALL PAIR data.
             page.setValueOfField(page.buildingYear, building_year);
@@ -80,102 +88,122 @@ using(testdata, function (data) {
                             expect(a[0]).toEqual(building_year);
                         })
                 }
-                switch (living_area) {
-                    case '':
-                        expect(page.overviewLivingArea.isPresent()).toBe(false);
-                        break;
-                    default:
-                        page.overviewLivingArea.getText().then(function (text) {
-                            expect(page.overviewLivingArea.isDisplayed()).toBe(true);
-                            var a = text.split(/ |\n/);
-                            expect(a[0]).toEqual(living_area);
-                        })
-                }
-                switch (floor_number) {
-                    case '':
-                        expect(page.overviewFloorNumber.isPresent()).toBe(false);
-                        break;
-                    default:
-                        page.overviewFloorNumber.getText().then(function (text) {
-                            expect(page.overviewFloorNumber.isDisplayed()).toBe(true);
-                            var a = text.split(/ |\n/);
-                            if (floor_number != 'E.G.') {
-                                expect(a[0]).toEqual(floor_number);
-                            } else {
-                                expect(a[0]).toEqual('0');
-                            }
-                        })
-                }
-                switch (numbers_of_rooms) {
-                    case '':
-                        expect(page.overviewNumberOfRooms.isPresent()).toBe(false);
-                        break;
-                    default:
-                        page.overviewNumberOfRooms.getText().then(function (text) {
-                            expect(page.overviewNumberOfRooms.isDisplayed()).toBe(true);
-                            var a = text.split(/ |\n/);
-                            expect(a[0]).toEqual(numbers_of_rooms);
-                        })
-                }
-                switch (numbers_of_bathrooms) {
-                    case "":
-                        expect(page.overviewNumberOfBathrooms.isPresent()).toBe(false);
-                        break;
-                    default:
-                        page.overviewNumberOfBathrooms.getText().then(function (text) {
-                            expect(page.overviewNumberOfBathrooms.isDisplayed()).toBe(true);
-                            var a = text.split(/ |\n/);
-                            expect(a[0]).toEqual(numbers_of_bathrooms);
-                        })
-                }
-                switch (balcony_area) {
-                    case '':
-                        expect(page.overviewBalconyArea.isPresent()).toBe(false);
-                        break;
-                    default:
-                        page.overviewBalconyArea.getText().then(function (text) {
-                            expect(page.overviewBalconyArea.isDisplayed()).toBe(true);
-                            var a = text.split(/ |\n/);
-                            expect(a[0]).toEqual(balcony_area);
-                        })
-                }
-                switch (number_of_garages) {
-                    case '':
-                        expect(page.overviewNumberOfGarages.isPresent()).toBe(false);
-                        break;
-                    default:
-                        page.overviewNumberOfGarages.getText().then(function (text) {
-                            expect(page.overviewNumberOfGarages.isDisplayed()).toBe(true);
-                            var a = text.split(/ |\n/);
-                            expect(a[0]).toEqual(number_of_garages);
-                        })
-                }
-                switch (number_of_parking_spots) {
-                    case '':
-                        expect(page.overviewNumberOfParkingSpots.isPresent()).toBe(false);
-                        break;
-                    default:
-                        page.overviewNumberOfParkingSpots.getText().then(function (text) {
-                            expect(page.overviewNumberOfParkingSpots.isDisplayed()).toBe(true);
-                            var a = text.split(/ |\n/);
-                            expect(a[0]).toEqual(number_of_parking_spots);
-                        })
-                }
-            }).then(function () {
-                //this is check for Apartments only, Lift for houses isn't counted.
-                if (data.LIFT == 1) {
-                    expect(page.overviewLift.isPresent()).toBe(true);
-                }
-            });
-
-            it('user is returned to Input page', function () {
-                allure.feature('Navigation with Left Menu');
-                page = new LeftMenu(page);
-                page.menuItems.get(0).click();
             });
         }, 240000);
 
-        afterEach(function () {
+        it(data.Case + ' check that Living area is displayed', function () {
+            switch (living_area) {
+                case '':
+                    expect(page.overviewLivingArea.isPresent()).toBe(false);
+                    break;
+                default:
+                    page.overviewLivingArea.getText().then(function (text) {
+                        expect(page.overviewLivingArea.isDisplayed()).toBe(true);
+                        var a = text.split(/ |\n/);
+                        expect(a[0]).toEqual(living_area);
+                    })
+            }
+        });
+
+        it(data.Case + ' check that Floor number is displayed', function () {
+            switch (floor_number) {
+                case '':
+                    expect(page.overviewFloorNumber.isPresent()).toBe(false);
+                    break;
+                default:
+                    page.overviewFloorNumber.getText().then(function (text) {
+                        expect(page.overviewFloorNumber.isDisplayed()).toBe(true);
+                        var a = text.split(/ |\n/);
+                        if (floor_number != 'E.G.') {
+                            expect(a[0]).toEqual(floor_number);
+                        } else {
+                            expect(a[0]).toEqual('0');
+                        }
+                    })
+            }
+        });
+
+        it(data.Case + ' check that Number of rooms is displayed/hidden', function () {
+            switch (numbers_of_rooms) {
+                case '':
+                    expect(page.overviewNumberOfRooms.isPresent()).toBe(false);
+                    break;
+                default:
+                    page.overviewNumberOfRooms.getText().then(function (text) {
+                        expect(page.overviewNumberOfRooms.isDisplayed()).toBe(true);
+                        var a = text.split(/ |\n/);
+                        expect(a[0]).toEqual(numbers_of_rooms);
+                    })
+            }
+        });
+
+        it(data.Case + ' check that Number of Bathrooms is displayed/hidden', function () {
+            switch (numbers_of_bathrooms) {
+                case "":
+                    expect(page.overviewNumberOfBathrooms.isPresent()).toBe(false);
+                    break;
+                default:
+                    page.overviewNumberOfBathrooms.getText().then(function (text) {
+                        expect(page.overviewNumberOfBathrooms.isDisplayed()).toBe(true);
+                        var a = text.split(/ |\n/);
+                        expect(a[0]).toEqual(numbers_of_bathrooms);
+                    })
+            }
+        });
+
+        it(data.Case + ' check that Balcony area is displayed/hidden', function () {
+            switch (balcony_area) {
+                case '':
+                    expect(page.overviewBalconyArea.isPresent()).toBe(false);
+                    break;
+                default:
+                    page.overviewBalconyArea.getText().then(function (text) {
+                        expect(page.overviewBalconyArea.isDisplayed()).toBe(true);
+                        var a = text.split(/ |\n/);
+                        expect(a[0]).toEqual(balcony_area);
+                    })
+            }
+        });
+
+        it(data.Case + ' check that Number of garages is displayed/hidden', function () {
+            switch (number_of_garages) {
+                case '':
+                    expect(page.overviewNumberOfGarages.isPresent()).toBe(false);
+                    break;
+                default:
+                    page.overviewNumberOfGarages.getText().then(function (text) {
+                        expect(page.overviewNumberOfGarages.isDisplayed()).toBe(true);
+                        var a = text.split(/ |\n/);
+                        expect(a[0]).toEqual(number_of_garages);
+                    })
+            }
+        });
+
+        it(data.Case + ' check that Number of parking spots is displayed/hidden', function () {
+            switch (number_of_parking_spots) {
+                case '':
+                    expect(page.overviewNumberOfParkingSpots.isPresent()).toBe(false);
+                    break;
+                default:
+                    page.overviewNumberOfParkingSpots.getText().then(function (text) {
+                        expect(page.overviewNumberOfParkingSpots.isDisplayed()).toBe(true);
+                        var a = text.split(/ |\n/);
+                        expect(a[0]).toEqual(number_of_parking_spots);
+                    })
+            }
+        });
+
+        it(data.Case + ' check that Lift is displayed/hidden', function () {
+            //this is check for Apartments only, Lift for houses isn't counted.
+            if (data.LIFT == 1) {
+                expect(page.overviewLift.isPresent()).toBe(true);
+            }
+
+            page = new LeftMenu(page);
+            page.menuItems.get(0).click();
+        });
+
+        afterAll(function () {
             page = new InputPage(page);
             page.logoutLink.click();
             page = new LoginPage();
