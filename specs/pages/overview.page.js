@@ -2,6 +2,7 @@
 
 var OverviewPage = function () {
 };
+var EC = protractor.ExpectedConditions;
 
  OverviewPage.prototype = Object.create({}, {
     //---------------------------Info Pane objects-------------------------------------------------
@@ -28,7 +29,13 @@ var OverviewPage = function () {
      marketGoExplore: { get: function () { return element(by.css('[ng-click="$ctrl.goToMarket()"]')); }},
      similarGoExplore: { get: function () { return element(by.css('[ng-click="$ctrl.goToSimilarOverview()"]')); }},
      offersInArea: { get: function () { return element.all(by.css('[ng-click="$ctrl.handleClick()"]')); }},
-     offersQuantityInArea: { get: function () { return element.all(by.css('[ng-if="$ctrl.cardData.quantity || $ctrl.cardData.quantity"]')); }}
+     offersQuantityInArea: { get: function () { return element.all(by.css('[ng-if="$ctrl.cardData.quantity || $ctrl.cardData.quantity"]')); }},
+
+     //Function to click button with EC
+     waitElement: { value: function (webelement) {
+            browser.wait(EC.visibilityOf(webelement), 10000);
+        }
+     }
 });
 
 module.exports = OverviewPage;
