@@ -34,8 +34,8 @@ describe('Navigation from Overview to Score pages: ', function () {
             page.clickButton(page.getValuation)
         }).then(function () {
             page = new OverviewPage(page);
-            browser.wait(EC.visibilityOf(page.similarGoExplore), 10000);
 
+            page.waitElement(page.similarGoExplore);
             page.noiseScore.getText().then(function (text) {
                 noiseScoreValue = text;
             });
@@ -60,7 +60,9 @@ describe('Navigation from Overview to Score pages: ', function () {
             //variable for values of Scores
             page.noiseScore.click().then(function () {
                 page = new NoisePage;
-                browser.wait(EC.textToBePresentInElement(page.quietScore, String(noiseScoreValue)), 10000);
+
+                //Wait for Score and comparing with initial value
+                page.waitForScore(page.quietScore, String(noiseScoreValue));
                 page.quietScore.getText().then(function (text) {
                     expect(Number(text)).toBe(Number(noiseScoreValue));
                 })
@@ -72,12 +74,14 @@ describe('Navigation from Overview to Score pages: ', function () {
         //Get back to Overview
         page = new LeftMenu(page);
         page.menuItems.get(1).click();
-        
+
         //Navigate to View page
         page = new OverviewPage(page);
         page.viewScore.click().then(function () {
             page = new ViewPage(page);
-            browser.wait(EC.textToBePresentInElement(page.viewScore, String(viewScoreValue)), 10000);
+
+            //Wait for Score and comparing with initial value
+            page.waitForScore(page.viewScore, String(viewScoreValue));
             page.viewScore.getText().then(function (text) {
                 expect(Number(text)).toBe(Number(viewScoreValue));
             })
@@ -93,7 +97,9 @@ describe('Navigation from Overview to Score pages: ', function () {
         page = new OverviewPage(page);
         page.immisionsScore.click().then(function () {
             page = new ImmissionsPage(page);
-            browser.wait(EC.textToBePresentInElement(page.immissionsScore, String(immisionsScoreValue)), 10000);
+
+            //Wait for Score and comparing with initial value
+            page.waitForScore(page.immissionsScore, String(immisionsScoreValue));
             page.immissionsScore.getText().then(function (text) {
                 expect(Number(text)).toBe(Number(immisionsScoreValue));
             })
@@ -104,12 +110,14 @@ describe('Navigation from Overview to Score pages: ', function () {
         //Navigate to Overview page
         page = new LeftMenu(page);
         page.menuItems.get(1).click();
-        
+
         //Navigate to Shopping page
         page = new OverviewPage(page);
         page.shoppingScore.click().then(function () {
             page = new ShoppingPage(page);
-            browser.wait(EC.textToBePresentInElement(page.shoppingScore, String(shoppingScoreValue)), 10000);
+
+            //Wait for Score and comparing with initial value
+            page.waitForScore(page.shoppingScore, String(shoppingScoreValue));
             page.shoppingScore.getText().then(function (text) {
                 expect(Number(text)).toBe(Number(shoppingScoreValue));
             })
@@ -120,12 +128,14 @@ describe('Navigation from Overview to Score pages: ', function () {
         //Navigate to Overview page
         page = new LeftMenu(page);
         page.menuItems.get(1).click();
-        
+
         //Navigate to Family page
         page = new OverviewPage(page);
         page.familyScore.click().then(function () {
             page = new FamilyPage(page);
-            browser.wait(EC.textToBePresentInElement(page.familyScore, String(familyScoreValue)), 10000);
+
+            //Wait for Score and comparing with initial value
+            page.waitForScore(page.familyScore, String(familyScoreValue));
             page.familyScore.getText().then(function (text) {
                 expect(Number(text)).toBe(Number(familyScoreValue));
             })
