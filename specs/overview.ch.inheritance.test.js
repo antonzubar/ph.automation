@@ -83,7 +83,6 @@ using(testdata, function (data) {
                         break;
                     default:
                         page.overviewBuildingYear.getText().then(function (text) {
-                            expect(page.overviewBuildingYear.isDisplayed()).toBe(true);
                             var a = text.split(/ |\n/);
                             expect(a[0]).toEqual(building_year);
                         })
@@ -98,12 +97,11 @@ using(testdata, function (data) {
                     break;
                 default:
                     page.overviewLivingArea.getText().then(function (text) {
-                        expect(page.overviewLivingArea.isDisplayed()).toBe(true);
                         var a = text.split(/ |\n/);
                         expect(a[0]).toEqual(living_area);
                     })
             }
-        });
+        }, 24000);
 
         it(data.Case + ' check that Floor number is displayed', function () {
             switch (floor_number) {
@@ -112,7 +110,6 @@ using(testdata, function (data) {
                     break;
                 default:
                     page.overviewFloorNumber.getText().then(function (text) {
-                        expect(page.overviewFloorNumber.isDisplayed()).toBe(true);
                         var a = text.split(/ |\n/);
                         if (floor_number != 'E.G.') {
                             expect(a[0]).toEqual(floor_number);
@@ -130,7 +127,6 @@ using(testdata, function (data) {
                     break;
                 default:
                     page.overviewNumberOfRooms.getText().then(function (text) {
-                        expect(page.overviewNumberOfRooms.isDisplayed()).toBe(true);
                         var a = text.split(/ |\n/);
                         expect(a[0]).toEqual(numbers_of_rooms);
                     })
@@ -144,7 +140,6 @@ using(testdata, function (data) {
                     break;
                 default:
                     page.overviewNumberOfBathrooms.getText().then(function (text) {
-                        expect(page.overviewNumberOfBathrooms.isDisplayed()).toBe(true);
                         var a = text.split(/ |\n/);
                         expect(a[0]).toEqual(numbers_of_bathrooms);
                     })
@@ -158,7 +153,6 @@ using(testdata, function (data) {
                     break;
                 default:
                     page.overviewBalconyArea.getText().then(function (text) {
-                        expect(page.overviewBalconyArea.isDisplayed()).toBe(true);
                         var a = text.split(/ |\n/);
                         expect(a[0]).toEqual(balcony_area);
                     })
@@ -172,7 +166,6 @@ using(testdata, function (data) {
                     break;
                 default:
                     page.overviewNumberOfGarages.getText().then(function (text) {
-                        expect(page.overviewNumberOfGarages.isDisplayed()).toBe(true);
                         var a = text.split(/ |\n/);
                         expect(a[0]).toEqual(number_of_garages);
                     })
@@ -186,7 +179,6 @@ using(testdata, function (data) {
                     break;
                 default:
                     page.overviewNumberOfParkingSpots.getText().then(function (text) {
-                        expect(page.overviewNumberOfParkingSpots.isDisplayed()).toBe(true);
                         var a = text.split(/ |\n/);
                         expect(a[0]).toEqual(number_of_parking_spots);
                     })
