@@ -16,7 +16,7 @@ using(testdata, function (data) {
             page.loginToDash();
         });
 
-        it(data.Case + ' user lands on Input page', function () {
+        it(data.Case + ' user checks that Noise has sane value', function () {
             allure.feature('Overview page');
             page = new InputPage(page);
 
@@ -204,10 +204,7 @@ using(testdata, function (data) {
                 page.editScores.click();
                 page.saveQCL.click();
             });
-        }, 240000);
 
-        //Checking Noise page
-        it(data.Case + 'Check Noise score has sane value', function () {
             page.getValuation.click().then(function () {
                 //Going to Overview page
                 page = new OverviewPage(page);
@@ -222,7 +219,7 @@ using(testdata, function (data) {
                     }
                 });
             });
-        });
+        }, 240000);
 
         //Checking View page
         it(data.Case + 'Check View score has sane value', function () {
