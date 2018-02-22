@@ -31,9 +31,8 @@ describe('Navigation from Overview to Score pages: ', function () {
 
         //Scroll down and verify that initial values are 0.
         browser.executeScript('window.scrollTo(100000, 100000);').then(function () {
-            browser.wait(EC.elementToBeClickable(page.getValuation), 5000);
-        });
-        page.getValuation.click().then(function () {
+            page.clickButton(page.getValuation)
+        }).then(function () {
             page = new OverviewPage(page);
             browser.wait(EC.visibilityOf(page.similarGoExplore), 10000);
 
@@ -64,14 +63,16 @@ describe('Navigation from Overview to Score pages: ', function () {
                 browser.wait(EC.textToBePresentInElement(page.quietScore, String(noiseScoreValue)), 10000);
                 page.quietScore.getText().then(function (text) {
                     expect(Number(text)).toBe(Number(noiseScoreValue));
-                    page = new LeftMenu(page);
-                    page.menuItems.get(1).click();
                 })
             });
         });
     }, 240000);
 
     it('Navigate to View page', function () {
+        //Get back to Overview
+        page = new LeftMenu(page);
+        page.menuItems.get(1).click();
+        
         //Navigate to View page
         page = new OverviewPage(page);
         page.viewScore.click().then(function () {
@@ -79,13 +80,15 @@ describe('Navigation from Overview to Score pages: ', function () {
             browser.wait(EC.textToBePresentInElement(page.viewScore, String(viewScoreValue)), 10000);
             page.viewScore.getText().then(function (text) {
                 expect(Number(text)).toBe(Number(viewScoreValue));
-                page = new LeftMenu(page);
-                page.menuItems.get(1).click();
             })
         });
     }, 240000);
 
     it('Navigate to Immisions page', function () {
+        //Navigate to Overview page
+        page = new LeftMenu(page);
+        page.menuItems.get(1).click();
+
         //Navigate to Immissions page
         page = new OverviewPage(page);
         page.immisionsScore.click().then(function () {
@@ -93,13 +96,15 @@ describe('Navigation from Overview to Score pages: ', function () {
             browser.wait(EC.textToBePresentInElement(page.immissionsScore, String(immisionsScoreValue)), 10000);
             page.immissionsScore.getText().then(function (text) {
                 expect(Number(text)).toBe(Number(immisionsScoreValue));
-                page = new LeftMenu(page);
-                page.menuItems.get(1).click();
             })
         });
     }, 240000);
 
     it('Navigate to Shopping page', function () {
+        //Navigate to Overview page
+        page = new LeftMenu(page);
+        page.menuItems.get(1).click();
+        
         //Navigate to Shopping page
         page = new OverviewPage(page);
         page.shoppingScore.click().then(function () {
@@ -107,23 +112,22 @@ describe('Navigation from Overview to Score pages: ', function () {
             browser.wait(EC.textToBePresentInElement(page.shoppingScore, String(shoppingScoreValue)), 10000);
             page.shoppingScore.getText().then(function (text) {
                 expect(Number(text)).toBe(Number(shoppingScoreValue));
-                page = new LeftMenu(page);
-                page.menuItems.get(1).click();
             })
         });
     }, 240000);
 
     it('Navigate to Family page', function () {
+        //Navigate to Overview page
+        page = new LeftMenu(page);
+        page.menuItems.get(1).click();
+        
         //Navigate to Family page
         page = new OverviewPage(page);
-
         page.familyScore.click().then(function () {
             page = new FamilyPage(page);
             browser.wait(EC.textToBePresentInElement(page.familyScore, String(familyScoreValue)), 10000);
             page.familyScore.getText().then(function (text) {
                 expect(Number(text)).toBe(Number(familyScoreValue));
-                page = new LeftMenu(page);
-                page.menuItems.get(0).click();
             })
         });
     }, 240000);
