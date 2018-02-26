@@ -7,7 +7,6 @@ var SimilarOffersPage = require('./pages/similar.offers.page');
 
 describe('Navigating from Overvieiw to Similar page: ', function () {
     var page = new LoginPage();
-    var EC = protractor.ExpectedConditions;
 
     beforeAll(function () {
         page.typeLogin(users_data[0].UserName);
