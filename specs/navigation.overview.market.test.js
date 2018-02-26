@@ -7,7 +7,6 @@ var MarketPage = require('./pages/market.page');
 
 describe('Navigating from Overvieiw to Market page: ', function () {
     var page = new LoginPage();
-    var EC = protractor.ExpectedConditions;
 
     beforeEach(function () {
         page.typeLogin(users_data[0].UserName);
