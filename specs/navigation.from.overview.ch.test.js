@@ -30,9 +30,8 @@ describe('Navigation from Overview to Score pages: ', function () {
 
         //Scroll down and verify that initial values are 0.
         browser.executeScript('window.scrollTo(100000, 100000);').then(function () {
-            browser.wait(EC.elementToBeClickable(page.getValuation), 5000);
-        });
-        page.getValuation.click().then(function () {
+            page.clickButton(page.getValuation)
+        }).then(function () {
             page = new OverviewPage(page);
 
             //Navigate to Noise page
