@@ -123,6 +123,11 @@ var EC = protractor.ExpectedConditions;
             return webelement;
         }
      },
+     //Function to get actual score with webElement's attribute
+     getScore: { value: function (webelement) {
+            return webelement.getAttribute('aria-valuenow');                       
+        }
+     },
 
 
     //navigation menu objects
