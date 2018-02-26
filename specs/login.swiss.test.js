@@ -27,7 +27,9 @@ using(testdata, function (data) {
             page = new InputPage(page);
             page.address.isPresent().then(function (result) {
                 if (result) {
-                    expect(page.address.getAttribute("value")).toEqual(data.DefaultAddress);
+                    page.getValue(page.address).then(function (text) {
+                       expect(text).toEqual(data.DefaultAddress); 
+                    });                    
                 }
             });
         });
