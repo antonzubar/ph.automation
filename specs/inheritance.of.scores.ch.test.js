@@ -67,7 +67,7 @@ describe('Navigation from Overview to Score pages: ', function () {
                 })
             });
         });
-    }, 240000);
+    }, 24000);
 
     it('Navigate to View page', function () {
         //Get back to Overview
@@ -85,7 +85,7 @@ describe('Navigation from Overview to Score pages: ', function () {
                 expect(Number(text)).toBe(Number(viewScoreValue));
             })
         });
-    }, 240000);
+    }, 24000);
 
     it('Navigate to Immisions page', function () {
         //Navigate to Overview page
@@ -103,7 +103,7 @@ describe('Navigation from Overview to Score pages: ', function () {
                 expect(Number(text)).toBe(Number(immisionsScoreValue));
             })
         });
-    }, 240000);
+    }, 24000);
 
     it('Navigate to Shopping page', function () {
         //Navigate to Overview page
@@ -121,7 +121,7 @@ describe('Navigation from Overview to Score pages: ', function () {
                 expect(Number(text)).toBe(Number(shoppingScoreValue));
             })
         });
-    }, 240000);
+    }, 24000);
 
     it('Navigate to Family page', function () {
         //Navigate to Overview page
@@ -139,7 +139,7 @@ describe('Navigation from Overview to Score pages: ', function () {
                 expect(Number(text)).toBe(Number(familyScoreValue));
             })
         });
-    }, 240000);
+    }, 24000);
 
     afterAll(function () {
         page = new InputPage(page);
