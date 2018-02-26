@@ -19,7 +19,7 @@ describe('Navigating from Overvieiw to Similar page: ', function () {
         allure.feature('Input page');
         page = new InputPage(page);
 
-        page.typeAddress("Hardgutstrasse 22, 8048 Zürich, Switzerland");
+        page.typeAddress("Pfingstweidstrasse 51, 8005 Zürich, Switzerland");
         page.setValueOfField(page.buildingYear, page.getRandomInteger("1990"));
         page.setValueOfField(page.livingArea, page.getRandomInteger("60"));
         page.setValueOfField(page.floorNumber, page.getRandomInteger("5"));
