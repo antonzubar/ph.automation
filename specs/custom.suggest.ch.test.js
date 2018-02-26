@@ -20,19 +20,23 @@ describe('Custom scores for Input: ', function () {
         //Scroll down and go to custom score input. Save default custom scores.
         browser.executeScript("arguments[0].scrollIntoView();", page.getValuation.getWebElement()).then(function () {
             page.editScores.click();
+
             //remember new QCL values
-            page.scoreQualitySlider.getAttribute('aria-valuenow').then(function (text) {
+            page.getScore(page.scoreQualitySlider).then(function (text) {
                 manualQuality = text;
             });
-            page.scoreConditionSlider.getAttribute('aria-valuenow').then(function (text) {
+
+            page.getScore(page.scoreConditionSlider).then(function (text) {
                 manualCondition = text;
             });
-            page.scoreLocationSlider.getAttribute('aria-valuenow').then(function (text) {
+
+            page.getScore(page.scoreLocationSlider).then(function (text) {
                 manualLocation = text;
             }).then(function () {
                 page.saveQCL.click();
             })
         });
+
 
         //Verify that default custom QCL values are saved
         page.waitForScore(page.scoreQuality, qcl_default_data[0].Quality);
