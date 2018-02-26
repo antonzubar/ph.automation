@@ -11,6 +11,10 @@ var EC = protractor.ExpectedConditions;
     //Address elements
      address: { get: function () { return element(by.id('address')); }},
      typeAddress: { value: function (keys) { return this.address.clear().sendKeys(keys, protractor.Key.TAB); }},
+     getValue: { value: function (webelement) {
+            return webelement.getAttribute('value');
+        }
+     },
 
     //Types of properties
      apartmentType: { value: function () { return element(by.id('apartmentType'))}},
