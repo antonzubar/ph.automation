@@ -106,6 +106,7 @@ var EC = protractor.ExpectedConditions;
      scoreConditionSlider: { get: function () { return element(by.id('condition')); }},
      scoreLocationSlider: { get: function () { return element(by.id('microlocation')); }},
      saveQCL: { get: function () { return element(by.css('[ng-click="$ctrl.saveQCL()"]')); }},
+     cancelQCL: { get: function () { return element(by.css('[ng-click="$ctrl.cancelQCL()"]')); }},
 
      //Valuation Block
      getValuation: { get: function () { return element(by.css('[ng-click="$ctrl.valuate()"]')); }},
@@ -114,6 +115,12 @@ var EC = protractor.ExpectedConditions;
      clickButton: { value: function (webelement) {
             browser.wait(EC.elementToBeClickable(webelement), 5000);
             return webelement.click();
+        }
+     },
+     //Function to wait until score takes its value
+     waitForScore: { value: function (webelement, scoreValue) {
+            browser.wait(EC.textToBePresentInElement(webelement, scoreValue), 15000);
+            return webelement;
         }
      },
 
