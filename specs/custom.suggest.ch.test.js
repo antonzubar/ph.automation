@@ -1,6 +1,7 @@
 var LoginPage = require('./pages/login.page');
 var InputPage = require('./pages/input.page');
 var users_data = require('./test_data/users.testdata.js');
+var qcl_default_data = require('./test_data/ch.input.default.values.testdata.js');
 
 describe('Custom scores for Input: ', function () {
     var page = new LoginPage();
@@ -16,54 +17,39 @@ describe('Custom scores for Input: ', function () {
         allure.feature('Input page');
         page = new InputPage(page);
 
-        //Scroll down and verify that initial values are 0.
-        browser.executeScript('window.scrollTo(100000, 100000);').then(function () {
+        //Scroll down and go to custom score input. Save default custom scores.
+        browser.executeScript("arguments[0].scrollIntoView();", page.getValuation.getWebElement()).then(function () {
             page.editScores.click();
+            //remember new QCL values
+            page.scoreQualitySlider.getAttribute('aria-valuenow').then(function (text) {
+                manualQuality = text;
+            });
+            page.scoreConditionSlider.getAttribute('aria-valuenow').then(function (text) {
+                manualCondition = text;
+            });
+            page.scoreLocationSlider.getAttribute('aria-valuenow').then(function (text) {
+                manualLocation = text;
+            }).then(function () {
+                page.saveQCL.click();
+            })
         });
 
-        //Set custom QCL values by moving sliders
-        browser.actions().dragAndDrop(
-            page.scoreQualitySlider,
-            {x: 30, y: 0}
-        ).perform();
-
-        browser.actions().dragAndDrop(
-            page.scoreConditionSlider,
-            {x: 30, y: 0}
-        ).perform();
-
-        browser.actions().dragAndDrop(
-            page.scoreLocationSlider,
-            {x: 30, y: 0}
-        ).perform();
-
-        //remember new QCL values        
-        page.scoreQualitySlider.getAttribute('aria-valuenow').then(function (text) {
-            manualQuality = text;
-        });
-        page.scoreConditionSlider.getAttribute('aria-valuenow').then(function (text) {
-            manualCondition = text;
-        });
-        page.scoreLocationSlider.getAttribute('aria-valuenow').then(function (text) {
-            manualLocation = text;
-        });
-
-        //click save and verify that changes are saved
-        page.saveQCL.click();
-        browser.sleep(4000);
-
+        //Verify that default custom QCL values are saved
+        page.waitForScore(page.scoreQuality, qcl_default_data[0].Quality);
         page.scoreQuality.getText().then(function (text) {
             expect(+text).toBe(+manualQuality);
         });
     }, 24000);
 
     it('Custom Condition Score is saved', function () {
+        page.waitForScore(page.scoreCondition, qcl_default_data[0].Condition);
         page.scoreCondition.getText().then(function (text) {
             expect(+text).toBe(+manualCondition);
         });
     });
 
     it('Custom Location Score is saved', function () {
+        page.waitForScore(page.scoreLocation, qcl_default_data[0].Location);
         page.scoreLocation.getText().then(function (text) {
             expect(+text).toBe(+manualLocation);
         });
