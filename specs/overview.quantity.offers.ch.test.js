@@ -7,7 +7,6 @@ var SimilarOffersPage = require('./pages/similar.offers.page');
 
 describe(' Comparing offers quantity between Overview and Similar Offers pages', function () {
     var page = new LoginPage();
-    var EC = protractor.ExpectedConditions;
 
     beforeAll(function () {
         page.typeLogin(users_data[0].UserName);
