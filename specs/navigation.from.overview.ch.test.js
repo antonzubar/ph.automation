@@ -28,7 +28,7 @@ describe('Navigation from Overview to Score pages: ', function () {
         page.setValueOfField(page.numberOfRooms, page.getRandomInteger(""));
 
         //Scroll down and verify that initial values are 0.
-        browser.executeScript('window.scrollTo(100000, 100000);').then(function () {
+        browser.executeScript("arguments[0].scrollIntoView();", page.getValuation.getWebElement()).then(function () {
             page.clickButton(page.getValuation)
         }).then(function () {
             page = new OverviewPage(page);
