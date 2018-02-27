@@ -28,8 +28,20 @@ var EC = protractor.ExpectedConditions;
      //Market and Similar navigations
      marketGoExplore: { get: function () { return element(by.css('[ng-click="$ctrl.goToMarket()"]')); }},
      similarGoExplore: { get: function () { return element(by.css('[ng-click="$ctrl.goToSimilarOverview()"]')); }},
-     offersInArea: { get: function () { return element.all(by.css('[ng-click="$ctrl.handleClick()"]')); }},
-     offersQuantityInArea: { get: function () { return element.all(by.css('[ng-if="$ctrl.cardData.quantity || $ctrl.cardData.quantity"]')); }},
+
+     //Widget/buttons in Similar block
+     activeOffersInAreaButton: {
+         get: function () {
+             return element(by.css('[card-data="$ctrl.offers.online"]')).element(by.css('[ng-click="$ctrl.handleClick()"]'));
+         }
+     },
+     historicOffersInAreaButton: {
+         get: function () {
+             return element(by.css('[card-data="$ctrl.offers.lastYears"]')).element(by.css('[ng-click="$ctrl.handleClick()"]'));
+         }
+     },
+
+     //Quantity of Active & Historic similar offers
      activeOffersInArea: {
          get: function () {
              return element(by.css('[card-data="$ctrl.offers.online"]')).element(by.css('[ng-if="$ctrl.cardData.quantity || $ctrl.cardData.quantity"]'));
