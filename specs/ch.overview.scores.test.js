@@ -208,64 +208,44 @@ using(testdata, function (data) {
             page.getValuation.click().then(function () {
                 //Going to Overview page
                 page = new OverviewPage(page);
+                page.waitElement(page.similarGoExplore);
 
                 page.noiseScore.getText().then(function (text) {
                     noiseScoreNumber = Number(text);
-                    browser.waitForAngular();
-                    if (1 < noiseScoreNumber && noiseScoreNumber <= 5) {
-                        expect('Test is passed').toBe('Test is passed');
-                    } else {
-                        expect('Test is passed').toBe('Failed');
-                    }
+                    expect(noiseScoreNumber >= 1 && noiseScoreNumber<= 5).toBeTruthy();
                 });
             });
         }, 240000);
 
         //Checking View page
-        it(data.Case + 'Check View score has sane value', function () {
+        it(data.Case + ' : Check View score has sane value', function () {
             page.viewScore.getText().then(function (text) {
                 viewScoreNumber = Number(text);
-                if (1 < viewScoreNumber && viewScoreNumber <= 5) {
-                    expect('Test is passed').toBe('Test is passed');
-                } else {
-                    expect('Test is passed').toBe('Failed');
-                }
+                expect(viewScoreNumber >= 1 && viewScoreNumber<= 5).toBeTruthy();
             });
         });
 
         //Checking Immisions page
-        it(data.Case + 'Check Immisions score has sane value', function () {
+        it(data.Case + ' : Check Immisions score has sane value', function () {
             page.immisionsScore.getText().then(function (text) {
                 immisionsScoreNumber = Number(text);
-                if (1 < immisionsScoreNumber && immisionsScoreNumber <= 5) {
-                    expect('Test is passed').toBe('Test is passed');
-                } else {
-                    expect('Test is passed').toBe('Failed');
-                }
+                expect(immisionsScoreNumber >= 1 && immisionsScoreNumber<= 5).toBeTruthy();
             });
         });
 
         //Checking Shopping score
-        it(data.Case + 'Check Shopping score has sane value', function () {
+        it(data.Case + ' : Check Shopping score has sane value', function () {
             page.shoppingScore.getText().then(function (text) {
                 shoppingScoreNumber = Number(text);
-                if (1 <= shoppingScoreNumber && shoppingScoreNumber <= 5) {
-                    expect('Test is passed').toBe('Test is passed');
-                } else {
-                    expect('Test is passed').toBe('Failed');
-                }
+                expect(shoppingScoreNumber >= 1 && shoppingScoreNumber<= 5).toBeTruthy();
             });
         });
 
         //Checking Family score
-        it(data.Case + 'Check Family score has sane value', function () {
+        it(data.Case + ' : Check Family score has sane value', function () {
             page.familyScore.getText().then(function (text) {
                 familyScoreNumber = Number(text);
-                if (1 < familyScoreNumber && familyScoreNumber <= 5) {
-                    expect('Test is passed').toBe('Test is passed');
-                } else {
-                    expect('Test is passed').toBe('Failed');
-                }
+                expect(familyScoreNumber >= 1 && familyScoreNumber<= 5).toBeTruthy();
             }).then(function () {
                 page = new LeftMenu(page);
                 page.menuItems.get(0).click();
