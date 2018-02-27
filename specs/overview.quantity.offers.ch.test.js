@@ -33,19 +33,14 @@ describe(' Comparing offers quantity between Overview and Similar Offers pages',
             //Navigate to Active Offers
             var quantityOfActiveOffers;
             page.offersQuantityInArea.get(0).getText().then(function (text) {
-                quantityOfActiveOffers = text;
+                //Leave only digitals from string
+                quantityOfActiveOffers = String(text).replace(/\D/g,'');
             });
             page.offersInArea.get(0).click().then(function () {
                 page = new SimilarOffersPage(page);
                 page.similarOffersLabel.getText().then(function (text) {
                     page.similarCard.count().then(function (size) {
-                        var object;
-                        if (size == 1) {
-                            object = " Objekt)"
-                        } else {
-                            object = " Objekte)"
-                        }
-                        expect(String(quantityOfActiveOffers)).toBe("(" + size + object);
+                        expect(+quantityOfActiveOffers).toBe(size);
                     });
                 })
             });
@@ -62,19 +57,14 @@ describe(' Comparing offers quantity between Overview and Similar Offers pages',
         //Navigate to Historical Offers
         var quantityOfHistoricalOffers;
         page.offersQuantityInArea.get(1).getText().then(function (text) {
-            quantityOfHistoricalOffers = text;
+            //Leave only digitals from string
+            quantityOfHistoricalOffers = String(text).replace(/\D/g,'');
         });
         page.offersInArea.get(1).click().then(function () {
             page = new SimilarOffersPage(page);
             page.similarOffersLabel.getText().then(function (text) {
                 page.similarCard.count().then(function (size) {
-                    var object;
-                    if (size == 1) {
-                        object = " Objekt)"
-                    } else {
-                        object = " Objekte)"
-                    }
-                    expect(String(quantityOfHistoricalOffers)).toBe("(" + size + object);
+                    expect(+quantityOfHistoricalOffers).toBe(size);
                 });
             })
         }, 20000);
