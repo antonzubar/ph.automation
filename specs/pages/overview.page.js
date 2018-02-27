@@ -30,6 +30,16 @@ var EC = protractor.ExpectedConditions;
      similarGoExplore: { get: function () { return element(by.css('[ng-click="$ctrl.goToSimilarOverview()"]')); }},
      offersInArea: { get: function () { return element.all(by.css('[ng-click="$ctrl.handleClick()"]')); }},
      offersQuantityInArea: { get: function () { return element.all(by.css('[ng-if="$ctrl.cardData.quantity || $ctrl.cardData.quantity"]')); }},
+     activeOffersInArea: {
+         get: function () {
+             return element(by.css('[card-data="$ctrl.offers.online"]')).element(by.css('[ng-if="$ctrl.cardData.quantity || $ctrl.cardData.quantity"]'));
+         }
+     },
+     historicOffersInArea: {
+         get: function () {
+             return element(by.css('[card-data="$ctrl.offers.lastYears"]')).element(by.css('[ng-if="$ctrl.cardData.quantity || $ctrl.cardData.quantity"]'));
+         }
+     },
 
      //Function to click button with EC
      waitElement: { value: function (webelement) {
