@@ -36,7 +36,7 @@ describe(' Comparing offers quantity between Overview and Similar Offers pages',
                 //Leave only digitals from string
                 quantityOfActiveOffers = String(text).replace(/\D/g,'');
             });
-            page.offersInArea.get(0).click().then(function () {
+            page.activeOffersInAreaButton.click().then(function () {
                 page = new SimilarOffersPage(page);
                 page.similarOffersLabel.getText().then(function (text) {
                     page.similarCard.count().then(function (size) {
@@ -60,7 +60,7 @@ describe(' Comparing offers quantity between Overview and Similar Offers pages',
             //Leave only digitals from string
             quantityOfHistoricalOffers = String(text).replace(/\D/g,'');
         });
-        page.offersInArea.get(1).click().then(function () {
+        page.historicOffersInAreaButton.click().then(function () {
             page = new SimilarOffersPage(page);
             page.similarOffersLabel.getText().then(function (text) {
                 page.similarCard.count().then(function (size) {
