@@ -32,7 +32,7 @@ describe(' Comparing offers quantity between Overview and Similar Offers pages',
 
             //Navigate to Active Offers
             var quantityOfActiveOffers;
-            page.offersQuantityInArea.get(0).getText().then(function (text) {
+            page.activeOffersInArea.getText().then(function (text) {
                 //Leave only digitals from string
                 quantityOfActiveOffers = String(text).replace(/\D/g,'');
             });
@@ -56,7 +56,7 @@ describe(' Comparing offers quantity between Overview and Similar Offers pages',
 
         //Navigate to Historical Offers
         var quantityOfHistoricalOffers;
-        page.offersQuantityInArea.get(1).getText().then(function (text) {
+        page.historicOffersInArea.getText().then(function (text) {
             //Leave only digitals from string
             quantityOfHistoricalOffers = String(text).replace(/\D/g,'');
         });
