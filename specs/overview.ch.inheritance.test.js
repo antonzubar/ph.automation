@@ -71,7 +71,7 @@ using(testdata, function (data) {
 
             //Scrolling down to Quality and Condition
             //Setting up Quality and Condition of Kitchen
-            browser.executeScript('window.scrollTo(1300, 900);').then(function () {
+            browser.executeScript("arguments[0].scrollIntoView();", page.getValuation.getWebElement()).then(function () {
                 page.getValuation.click();
             }).then(function () {
                 //Going to Overview page
