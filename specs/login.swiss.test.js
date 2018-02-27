@@ -14,7 +14,7 @@ using(testdata, function (data) {
             expect(browser.getTitle()).toEqual('Login | dash');
         });
 
-        it(' user logins to Swiss dash', function () {
+        it(data.UserName + ' user logins to Swiss dash', function () {
             allure.feature('Login/Logout feature');
             page.typeLogin(data.UserName);
             page.typePassword(data.Password);
@@ -23,18 +23,14 @@ using(testdata, function (data) {
             expect(browser.getTitle()).toEqual(data.PageTitle);
         });
 
-        it(' Check that address is default ', function () {
+        it(data.UserName + ' Check that address is default ', function () {
             page = new InputPage(page);
-            page.address.isPresent().then(function (result) {
-                if (result) {
-                    page.getValue(page.address).then(function (text) {
-                       expect(text).toEqual(data.DefaultAddress); 
-                    });                    
-                }
+            page.getValue(page.address).then(function (text) {
+                expect(text).toEqual(data.DefaultAddress);
             });
         });
 
-        it(' user is logged out', function () {
+        it(data.UserName + ' user is logged out', function () {
             allure.feature('Login/Logout feature');
             page.logout();
             page = new LoginPage();
