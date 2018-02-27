@@ -31,7 +31,7 @@ describe('Navigating from Overvieiw to Similar page: ', function () {
             page = new OverviewPage(page);
 
             //Navigate to Active Offers
-            page.offersInArea.get(0).click().then(function () {
+            page.activeOffersInAreaButton.click().then(function () {
                 page = new SimilarOffersPage(page);
                 page.similarOffersLabel.getText().then(function (text) {
                     expect(String(text)).toBe('Ähnliche Angebote');
@@ -46,7 +46,7 @@ describe('Navigating from Overvieiw to Similar page: ', function () {
         //Navigate to Historical Offers
         page = new OverviewPage(page);
         
-        page.offersInArea.get(1).click().then(function () {
+        page.historicOffersInAreaButton.click().then(function () {
             page = new SimilarOffersPage(page);
             page.similarOffersLabel.getText().then(function (text) {
                 expect(String(text)).toBe('Ähnliche Angebote');
