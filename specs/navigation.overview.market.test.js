@@ -4,6 +4,7 @@ var InputPage = require('./pages/input.page');
 var users_data = require('./test_data/users.testdata.js');
 var OverviewPage = require('./pages/overview.page');
 var MarketPage = require('./pages/market.page');
+var MarketAppData = require('./app_data/market.appdata.json');
 
 describe('Navigating from Overvieiw to Market page: ', function () {
     var page = new LoginPage();
@@ -33,7 +34,7 @@ describe('Navigating from Overvieiw to Market page: ', function () {
             page.marketGoExplore.click().then(function () {
                 page = new MarketPage(page);
                 page.marketLabel.getText().then(function (text) {
-                    expect(String(text)).toBe('Markt');
+                    expect(String(text)).toBe(MarketAppData.MainLabel);
                     page = new LeftMenu(page);
                     page.menuOverview.click();
                     page = new InputPage(page);
