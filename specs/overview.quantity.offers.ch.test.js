@@ -4,6 +4,7 @@ var InputPage = require('./pages/input.page');
 var users_data = require('./test_data/users.testdata.js');
 var OverviewPage = require('./pages/overview.page');
 var SimilarOffersPage = require('./pages/similar.offers.page');
+var AddressWithSimilar = require('./app_data/address.with.similar.offers.appdata.json');
 
 describe(' Comparing offers quantity between Overview and Similar Offers pages', function () {
     var page = new LoginPage();
@@ -18,11 +19,11 @@ describe(' Comparing offers quantity between Overview and Similar Offers pages',
         allure.feature('Input page');
         page = new InputPage(page);
 
-        page.typeAddress("Pfingstweidstrasse 51, 8005 Zürich, Switzerland");
-        page.setValueOfField(page.buildingYear, page.getRandomInteger("1990"));
-        page.setValueOfField(page.livingArea, page.getRandomInteger("60"));
-        page.setValueOfField(page.floorNumber, page.getRandomInteger("5"));
-        page.setValueOfField(page.numberOfRooms, page.getRandomInteger(""));
+        page.typeAddress(AddressWithSimilar.ADDRESS);
+        page.setValueOfField(page.buildingYear, page.getRandomInteger(AddressWithSimilar.BUILDING_YEAR));
+        page.setValueOfField(page.livingArea, page.getRandomInteger(AddressWithSimilar.NET_LIVING_AREA));
+        page.setValueOfField(page.floorNumber, page.getRandomInteger(AddressWithSimilar.FLOOR_NUMBER));
+        page.setValueOfField(page.numberOfRooms, page.getRandomInteger(AddressWithSimilar.NUMBERS_OF_ROOMS));
 
         //Scroll down and verify that initial values are 0.
         browser.executeScript("arguments[0].scrollIntoView();", page.getValuation.getWebElement()).then(function () {
