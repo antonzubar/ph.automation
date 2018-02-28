@@ -35,7 +35,7 @@ describe('Navigating from Overvieiw to Market page: ', function () {
                 page.marketLabel.getText().then(function (text) {
                     expect(String(text)).toBe('Markt');
                     page = new LeftMenu(page);
-                    page.menuItems.get(1).click();
+                    page.menuOverview.click();
                     page = new InputPage(page);
                 })
             });
