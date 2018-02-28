@@ -51,7 +51,7 @@ describe(' Comparing offers quantity between Overview and Similar Offers pages',
     it(' User clicks on Historical Offers and compare value between Overview and Offers', function () {
 
         page = new LeftMenu(page);
-        page.menuItems.get(1).click();
+        page.menuOverview.click();
         page = new OverviewPage(page);
 
         //Navigate to Historical Offers
