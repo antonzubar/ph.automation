@@ -58,7 +58,7 @@ describe('Navigation from Overview to Score pages: ', function () {
                 page.menuOverview.click();
             })
         });
-    });
+    }, 20000);
 
     it('Check that user navigates to Immisions page', function () {
         //Navigate to Immissions page
@@ -72,7 +72,7 @@ describe('Navigation from Overview to Score pages: ', function () {
                 page.menuOverview.click();
             })
         });
-    });
+    }, 20000);
 
     it('Check that user navigates to Shopping page', function () {
         //Navigate to Shopping page
@@ -86,7 +86,7 @@ describe('Navigation from Overview to Score pages: ', function () {
                 page.menuOverview.click();
             })
         });
-    });
+    }, 20000);
 
     it('Check that user navigates to Shopping page', function () {
         //Navigate to Family page
@@ -100,7 +100,7 @@ describe('Navigation from Overview to Score pages: ', function () {
                 page.menuInput.click();
             })
         });
-    });
+    }, 20000);
 
     afterAll(function () {
         page = new InputPage(page);
