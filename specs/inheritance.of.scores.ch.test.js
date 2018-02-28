@@ -72,7 +72,7 @@ describe('Navigation from Overview to Score pages: ', function () {
     it('Navigate to View page', function () {
         //Get back to Overview
         page = new LeftMenu(page);
-        page.menuItems.get(1).click();
+        page.menuOverview.click();
 
         //Navigate to View page
         page = new OverviewPage(page);
@@ -90,7 +90,7 @@ describe('Navigation from Overview to Score pages: ', function () {
     it('Navigate to Immisions page', function () {
         //Navigate to Overview page
         page = new LeftMenu(page);
-        page.menuItems.get(1).click();
+        page.menuOverview.click();
 
         //Navigate to Immissions page
         page = new OverviewPage(page);
@@ -108,7 +108,7 @@ describe('Navigation from Overview to Score pages: ', function () {
     it('Navigate to Shopping page', function () {
         //Navigate to Overview page
         page = new LeftMenu(page);
-        page.menuItems.get(1).click();
+        page.menuOverview.click();
 
         //Navigate to Shopping page
         page = new OverviewPage(page);
@@ -126,7 +126,7 @@ describe('Navigation from Overview to Score pages: ', function () {
     it('Navigate to Family page', function () {
         //Navigate to Overview page
         page = new LeftMenu(page);
-        page.menuItems.get(1).click();
+        page.menuOverview.click();
 
         //Navigate to Family page
         page = new OverviewPage(page);
