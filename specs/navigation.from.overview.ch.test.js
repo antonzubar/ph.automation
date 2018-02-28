@@ -39,7 +39,7 @@ describe('Navigation from Overview to Score pages: ', function () {
                 page.noiseLabel.getText().then(function (text) {
                     expect(String(text)).toBe('Geräusch');
                     page = new LeftMenu(page);
-                    page.menuItems.get(1).click();
+                    page.menuOverview.click();
                 })
             });
 
@@ -55,7 +55,7 @@ describe('Navigation from Overview to Score pages: ', function () {
             page.viewLabel.getText().then(function (text) {
                 expect(String(text)).toBe('Aussicht');
                 page = new LeftMenu(page);
-                page.menuItems.get(1).click();
+                page.menuOverview.click();
             })
         });
     });
@@ -69,7 +69,7 @@ describe('Navigation from Overview to Score pages: ', function () {
             page.immissionsLabel.getText().then(function (text) {
                 expect(String(text)).toBe('Immissionen');
                 page = new LeftMenu(page);
-                page.menuItems.get(1).click();
+                page.menuOverview.click();
             })
         });
     });
@@ -83,7 +83,7 @@ describe('Navigation from Overview to Score pages: ', function () {
             page.shoppingLabel.getText().then(function (text) {
                 expect(String(text)).toBe('Einkaufen');
                 page = new LeftMenu(page);
-                page.menuItems.get(1).click();
+                page.menuOverview.click();
             })
         });
     });
@@ -97,7 +97,7 @@ describe('Navigation from Overview to Score pages: ', function () {
             page.familyLabel.getText().then(function (text) {
                 expect(String(text)).toBe('Familie & Bildung');
                 page = new LeftMenu(page);
-                page.menuItems.get(0).click();
+                page.menuInput.click();
             })
         });
     });
