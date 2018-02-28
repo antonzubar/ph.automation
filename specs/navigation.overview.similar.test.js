@@ -36,7 +36,7 @@ describe('Navigating from Overvieiw to Similar page: ', function () {
                 page.similarOffersLabel.getText().then(function (text) {
                     expect(String(text)).toBe('Ähnliche Angebote');
                     page = new LeftMenu(page);
-                    page.menuItems.get(1).click();
+                    page.menuOverview.click();
                 })
             });
         });
@@ -51,7 +51,7 @@ describe('Navigating from Overvieiw to Similar page: ', function () {
             page.similarOffersLabel.getText().then(function (text) {
                 expect(String(text)).toBe('Ähnliche Angebote');
                 page = new LeftMenu(page);
-                page.menuItems.get(1).click();
+                page.menuOverview.click();
             })
         });
     }, 10000);
@@ -65,7 +65,7 @@ describe('Navigating from Overvieiw to Similar page: ', function () {
             page.similarOffersLabel.getText().then(function (text) {
                 expect(String(text)).toBe('Ähnliche Angebote');
                 page = new LeftMenu(page);
-                page.menuItems.get(1).click();
+                page.menuOverview.click();
                 page = new InputPage(page);
             })
         }, 10000);
