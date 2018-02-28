@@ -192,7 +192,7 @@ using(testdata, function (data) {
             }
 
             page = new LeftMenu(page);
-            page.menuItems.get(0).click();
+            page.menuInput.click();
         });
 
         afterAll(function () {
