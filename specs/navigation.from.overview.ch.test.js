@@ -13,6 +13,7 @@ var ViewAppData = require('./app_data/view.appdata.json');
 var ImmisionsAppData = require('./app_data/immisions.appdata.json');
 var ShopsAppData = require('./app_data/shops.appdata.json');
 var FamilyAppData = require('./app_data/family.appdata.json');
+var MinDataForValuation = require('./app_data/min.data.for.valuation.appdata.json');
 
 describe('Navigation from Overview to Score pages: ', function () {
     var page = new LoginPage();
@@ -27,10 +28,10 @@ describe('Navigation from Overview to Score pages: ', function () {
         allure.feature('Input page');
         page = new InputPage(page);
 
-        page.setValueOfField(page.buildingYear, page.getRandomInteger("1850~2018"));
-        page.setValueOfField(page.livingArea, page.getRandomInteger("1~500"));
-        page.setValueOfField(page.floorNumber, page.getRandomInteger("0~20"));
-        page.setValueOfField(page.numberOfRooms, page.getRandomInteger(""));
+        page.setValueOfField(page.buildingYear, page.getRandomInteger(MinDataForValuation.BUILDING_YEAR));
+        page.setValueOfField(page.livingArea, page.getRandomInteger(MinDataForValuation.NET_LIVING_AREA));
+        page.setValueOfField(page.floorNumber, page.getRandomInteger(MinDataForValuation.FLOOR_NUMBER));
+        page.setValueOfField(page.numberOfRooms, page.getRandomInteger(MinDataForValuation.NUMBERS_OF_ROOMS));
 
         //Scroll down and verify that initial values are 0.
         browser.executeScript("arguments[0].scrollIntoView();", page.getValuation.getWebElement()).then(function () {
