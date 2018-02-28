@@ -12,7 +12,6 @@ var LeftMenu = function () {};
      menuInput: { get: function () { return element(by.xpath('//span[contains(text(), " Eingabe ")]')); }},
      menuOverview: { get: function () { return element(by.xpath('//span[contains(text(), " Überblick ")]')); }},
      menuSimilar: { get: function () { return element(by.xpath('//span[contains(text(), " Ähnlich ")]')); }},
-     menuSimilarOverview: { get: function () { return element(by.xpath('//span[contains(text(), " Überblick ")]')); }},
      menuSimilarOffers: { get: function () { return element(by.xpath('//span[contains(text(), " Angebote ")]')); }},
      menuMarket: { get: function () { return element(by.xpath('//span[contains(text(), " Markt ")]')); }},
      menuEnvironment: { get: function () { return element(by.xpath('//span[contains(text(), " Umwelt ")]')); }},
