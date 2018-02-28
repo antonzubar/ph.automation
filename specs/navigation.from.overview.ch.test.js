@@ -8,6 +8,11 @@ var ViewPage = require('./pages/view.page');
 var ImmissionsPage = require('./pages/immissions.page');
 var ShoppingPage = require('./pages/shopping.page');
 var FamilyPage = require('./pages/family.page');
+var NoiseAppData = require('./app_data/noise.appdata.json');
+var ViewAppData = require('./app_data/view.appdata.json');
+var ImmisionsAppData = require('./app_data/immisions.appdata.json');
+var ShopsAppData = require('./app_data/shops.appdata.json');
+var FamilyAppData = require('./app_data/family.appdata.json');
 
 describe('Navigation from Overview to Score pages: ', function () {
     var page = new LoginPage();
@@ -37,7 +42,7 @@ describe('Navigation from Overview to Score pages: ', function () {
             page.noiseScore.click().then(function () {
                 page = new NoisePage;
                 page.noiseLabel.getText().then(function (text) {
-                    expect(String(text)).toBe('Geräusch');
+                    expect(String(text)).toBe(NoiseAppData.MainLabel);
                     page = new LeftMenu(page);
                     page.menuOverview.click();
                 })
@@ -53,7 +58,7 @@ describe('Navigation from Overview to Score pages: ', function () {
         page.viewScore.click().then(function () {
             page = new ViewPage(page);
             page.viewLabel.getText().then(function (text) {
-                expect(String(text)).toBe('Aussicht');
+                expect(String(text)).toBe(ViewAppData.MainLabel);
                 page = new LeftMenu(page);
                 page.menuOverview.click();
             })
@@ -67,7 +72,7 @@ describe('Navigation from Overview to Score pages: ', function () {
         page.immisionsScore.click().then(function () {
             page = new ImmissionsPage(page);
             page.immissionsLabel.getText().then(function (text) {
-                expect(String(text)).toBe('Immissionen');
+                expect(String(text)).toBe(ImmisionsAppData.MainLabel);
                 page = new LeftMenu(page);
                 page.menuOverview.click();
             })
@@ -81,7 +86,7 @@ describe('Navigation from Overview to Score pages: ', function () {
         page.shoppingScore.click().then(function () {
             page = new ShoppingPage(page);
             page.shoppingLabel.getText().then(function (text) {
-                expect(String(text)).toBe('Einkaufen');
+                expect(String(text)).toBe(ShopsAppData.MainLabel);
                 page = new LeftMenu(page);
                 page.menuOverview.click();
             })
@@ -95,7 +100,7 @@ describe('Navigation from Overview to Score pages: ', function () {
         page.familyScore.click().then(function () {
             page = new FamilyPage(page);
             page.familyLabel.getText().then(function (text) {
-                expect(String(text)).toBe('Familie & Bildung');
+                expect(String(text)).toBe(FamilyAppData.MainLabel);
                 page = new LeftMenu(page);
                 page.menuInput.click();
             })
