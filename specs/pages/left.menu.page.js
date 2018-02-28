@@ -10,7 +10,7 @@ var LeftMenu = function () {};
 
      //Menu items
      menuInput: { get: function () { return element(by.xpath('//span[contains(text(), " Eingabe ")]')); }},
-     menuOverview: { get: function () { return element(by.xpath('//span[contains(text(), " Überblick ")]')); }},
+     menuOverview: { get: function () { return element.all(by.xpath('//span[contains(text(), " Überblick ")]')).first(); }},
      menuSimilar: { get: function () { return element(by.xpath('//span[contains(text(), " Ähnlich ")]')); }},
      menuSimilarOffers: { get: function () { return element(by.xpath('//span[contains(text(), " Angebote ")]')); }},
      menuMarket: { get: function () { return element(by.xpath('//span[contains(text(), " Markt ")]')); }},
