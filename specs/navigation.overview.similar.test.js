@@ -4,6 +4,7 @@ var InputPage = require('./pages/input.page');
 var users_data = require('./test_data/users.testdata.js');
 var OverviewPage = require('./pages/overview.page');
 var SimilarOffersPage = require('./pages/similar.offers.page');
+var SimilarOffersAppData = require('./app_data/similar.offers.appdata.json');
 
 describe('Navigating from Overvieiw to Similar page: ', function () {
     var page = new LoginPage();
@@ -34,7 +35,7 @@ describe('Navigating from Overvieiw to Similar page: ', function () {
             page.activeOffersInAreaButton.click().then(function () {
                 page = new SimilarOffersPage(page);
                 page.similarOffersLabel.getText().then(function (text) {
-                    expect(String(text)).toBe('Ähnliche Angebote');
+                    expect(String(text)).toBe(SimilarOffersAppData.MainLabel);
                     page = new LeftMenu(page);
                     page.menuOverview.click();
                 })
@@ -49,7 +50,7 @@ describe('Navigating from Overvieiw to Similar page: ', function () {
         page.historicOffersInAreaButton.click().then(function () {
             page = new SimilarOffersPage(page);
             page.similarOffersLabel.getText().then(function (text) {
-                expect(String(text)).toBe('Ähnliche Angebote');
+                expect(String(text)).toBe(SimilarOffersAppData.MainLabel);
                 page = new LeftMenu(page);
                 page.menuOverview.click();
             })
@@ -63,7 +64,7 @@ describe('Navigating from Overvieiw to Similar page: ', function () {
         page.similarGoExplore.click().then(function () {
             page = new SimilarOffersPage(page);
             page.similarOffersLabel.getText().then(function (text) {
-                expect(String(text)).toBe('Ähnliche Angebote');
+                expect(String(text)).toBe(SimilarOffersAppData.MainLabel);
                 page = new LeftMenu(page);
                 page.menuOverview.click();
                 page = new InputPage(page);
