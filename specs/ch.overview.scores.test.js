@@ -248,7 +248,7 @@ using(testdata, function (data) {
                 expect(familyScoreNumber >= 1 && familyScoreNumber<= 5).toBeTruthy();
             }).then(function () {
                 page = new LeftMenu(page);
-                page.menuItems.get(0).click();
+                page.menuInput.click();
             });
         });
 
